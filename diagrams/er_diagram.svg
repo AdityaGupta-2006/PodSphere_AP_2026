@@ -1,0 +1,1405 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3240" height="2250" viewBox="0 0 3240 2250" style="background-color:#ffffff">
+<rect x="0" y="0" width="3240" height="2250" fill="#ffffff"/>
+<text x="48" y="46" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#202b3a">PODSPHERE · POSTGRESQL ENTITY RELATIONSHIP DIAGRAM</text>
+<text x="48" y="76" font-family="Arial,sans-serif" font-size="14" fill="#687588">CP2 logical schema · 23 tables · exact columns and constraints from dbms/03_schema.sql</text>
+<rect x="48" y="118" width="580" height="25" rx="3" fill="#e5f5f2" stroke="#34a995" stroke-width="1.2"/>
+<text x="60" y="135" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">IDENTITY</text>
+<rect x="48" y="1033" width="580" height="25" rx="3" fill="#e8f4fb" stroke="#4c9fca" stroke-width="1.2"/>
+<text x="60" y="1050" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">PODCAST</text>
+<rect x="700" y="118" width="580" height="25" rx="3" fill="#fff2e1" stroke="#d99a4e" stroke-width="1.2"/>
+<text x="712" y="135" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">LEARNING</text>
+<rect x="1352" y="118" width="580" height="25" rx="3" fill="#edf6eb" stroke="#69a56f" stroke-width="1.2"/>
+<text x="1364" y="135" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">EQUIPMENT</text>
+<rect x="2004" y="118" width="580" height="25" rx="3" fill="#f2ecf8" stroke="#9876bd" stroke-width="1.2"/>
+<text x="2016" y="135" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">STUDIOS &amp; SERVICES</text>
+<rect x="2656" y="118" width="580" height="25" rx="3" fill="#fbf5dc" stroke="#bc9b32" stroke-width="1.2"/>
+<text x="2668" y="135" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">FINANCE</text>
+<rect x="2656" y="1048" width="580" height="25" rx="3" fill="#faecea" stroke="#cf7770" stroke-width="1.2"/>
+<text x="2668" y="1065" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">FEEDBACK</text>
+<rect x="2656" y="1413" width="580" height="25" rx="3" fill="#edf1fa" stroke="#6483bd" stroke-width="1.2"/>
+<text x="2668" y="1430" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#304052">CREATOR PLANNING</text>
+<path d="M 338 343 L 648 343 L 648 565 L 338 565" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 338 354 L 330 354" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="338" cy="538" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 338 557 L 330 542" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 557 L 338 542" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 557 L 346 542" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 526 L 648 526 L 648 565 L 338 565" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 338 537 L 330 537" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="338" cy="538" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 338 557 L 330 542" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 557 L 338 542" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 557 L 346 542" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 343 L 648 343 L 648 750 L 338 750" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 338 354 L 330 354" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="338" cy="723" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 338 739 L 346 739" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 343 L 648 343 L 648 1070 L 338 1070" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 338 354 L 330 354" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="338" cy="1043" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 338 1062 L 330 1047" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 1062 L 338 1047" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 1062 L 346 1047" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 1336 L 648 1336 L 648 1375 L 338 1375" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 338 1347 L 330 1347" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="338" cy="1348" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 338 1367 L 330 1352" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 1367 L 338 1352" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 1367 L 346 1352" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 664 249 L 664 288 L 700 288" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="673" cy="288" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 692 288 L 677 296" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 692 288 L 677 288" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 692 288 L 677 280" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 421 L 1300 421 L 1300 470 L 990 470" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 990 432 L 982 432" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="990" cy="443" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 990 462 L 982 447" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 462 L 990 447" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 462 L 998 447" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 664 249 L 664 829 L 700 829" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="673" cy="829" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 692 829 L 677 837" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 692 829 L 677 829" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 692 829 L 677 821" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 421 L 1300 421 L 1300 735 L 990 735" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 990 432 L 982 432" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="990" cy="708" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 990 727 L 982 712" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 727 L 990 712" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 727 L 998 712" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 338 343 L 664 343 L 664 970 L 990 970" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 338 354 L 330 354" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="990" cy="943" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 990 962 L 982 947" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 962 L 990 947" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 962 L 998 947" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 684 L 1300 684 L 1300 970 L 990 970" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 990 695 L 982 695" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="990" cy="943" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 990 962 L 982 947" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 962 L 990 947" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 990 962 L 998 947" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 990 249 L 990 471 L 1352 471" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1325" cy="471" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1344 471 L 1329 479" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1344 471 L 1329 471" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1344 471 L 1329 463" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1642 291 L 1952 291 L 1952 325 L 1642 325" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1642 302 L 1634 302" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1642" cy="298" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1642 317 L 1634 302" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1642 317 L 1642 302" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1642 317 L 1650 302" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1642 617 L 1952 617 L 1952 665 L 1642 665" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1642 628 L 1634 628" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1642" cy="638" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1642 657 L 1634 642" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1642 657 L 1642 642" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1642 657 L 1650 642" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 990 249 L 990 824 L 1352 824" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1325" cy="824" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1344 824 L 1329 832" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1344 824 L 1329 824" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1344 824 L 1329 816" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 1316 249 L 1316 288 L 2004 288" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1977" cy="288" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1996 288 L 1981 296" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 288 L 1981 288" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 288 L 1981 280" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2294 421 L 2604 421 L 2604 470 L 2294 470" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2294 432 L 2286 432" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2294" cy="443" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2294 462 L 2286 447" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2294 462 L 2294 447" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2294 462 L 2302 447" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 1316 249 L 1316 616 L 2004 616" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1977" cy="616" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1996 616 L 1981 624" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 616 L 1981 616" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 616 L 1981 608" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 1316 249 L 1316 930 L 2004 930" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1977" cy="930" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1996 930 L 1981 938" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 930 L 1981 930" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 930 L 1981 922" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2294 1050 L 2604 1050 L 2604 1090 L 2294 1090" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2294 1061 L 2286 1061" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2294" cy="1063" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2294 1082 L 2286 1067" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2294 1082 L 2294 1067" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2294 1082 L 2302 1067" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 1316 249 L 1316 1249 L 2004 1249" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="1977" cy="1249" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1996 1249 L 1981 1257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 1249 L 1981 1249" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1996 1249 L 1981 1241" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 1642 249 L 1642 301 L 2656 301" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="301" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 301 L 2633 309" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 301 L 2633 301" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 301 L 2633 293" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 447 L 2636 447 L 2636 495 L 2946 495" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2946 458 L 2938 458" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2946" cy="468" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2946 487 L 2938 472" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 487 L 2946 472" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 487 L 2954 472" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 1642 249 L 1642 913 L 2656 913" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="913" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 913 L 2633 921" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 913 L 2633 913" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 913 L 2633 905" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 241 L 1642 241 L 1642 1236 L 2656 1236" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 241 L 639 249" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="1236" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 1236 L 2633 1244" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1236 L 2633 1236" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1236 L 2633 1228" fill="none" stroke="#263342" stroke-width="1.8"/>
+<rect x="1587" y="1226" width="110" height="16" fill="#fff" opacity=".95"/>
+<text x="1642" y="1238" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#36465b">reviewer_id</text>
+<path d="M 628 257 L 1642 257 L 1642 1252 L 2656 1252" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="655" cy="257" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 639 257 L 639 265" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="1252" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 1252 L 2633 1260" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1252 L 2633 1252" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1252 L 2633 1244" fill="none" stroke="#263342" stroke-width="1.8"/>
+<rect x="1587" y="1242" width="110" height="16" fill="#fff" opacity=".95"/>
+<text x="1642" y="1254" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#36465b">reviewed_user_id</text>
+<path d="M 1932 471 L 2294 471 L 2294 1244 L 2656 1244" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1959" cy="471" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1943 471 L 1943 479" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="1244" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 1244 L 2633 1252" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1244 L 2633 1244" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1244 L 2633 1236" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2294 421 L 2620 421 L 2620 1085 L 2946 1085" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2294" cy="448" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2294 432 L 2286 432" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2946" cy="1058" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2946 1077 L 2938 1062" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 1077 L 2946 1062" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 1077 L 2954 1062" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2584 930 L 2620 930 L 2620 1244 L 2656 1244" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2611" cy="930" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2595 930 L 2595 938" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="1244" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 1244 L 2633 1252" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1244 L 2633 1244" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1244 L 2633 1236" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 1280 288 L 1968 288 L 1968 1244 L 2656 1244" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1307" cy="288" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 1291 288 L 1291 296" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="1244" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 1244 L 2633 1252" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1244 L 2633 1244" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1244 L 2633 1236" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 628 249 L 1642 249 L 1642 1583 L 2656 1583" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 639 249 L 639 257" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2629" cy="1583" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2648 1583 L 2633 1591" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1583 L 2633 1583" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2648 1583 L 2633 1575" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 1716 L 2636 1716 L 2636 1760 L 2946 1760" fill="none" stroke="#283544" stroke-width="1.55" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 2946 1727 L 2938 1727" fill="none" stroke="#263342" stroke-width="1.8"/>
+<circle cx="2946" cy="1733" r="4.2" fill="#fff" stroke="#263342" stroke-width="1.7"/>
+<path d="M 2946 1752 L 2938 1737" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 1752 L 2946 1737" fill="none" stroke="#263342" stroke-width="1.8"/>
+<path d="M 2946 1752 L 2954 1737" fill="none" stroke="#263342" stroke-width="1.8"/>
+<rect x="48" y="155" width="580" height="188" fill="#fff" stroke="#34a995" stroke-width="1.6"/>
+<rect x="48" y="155" width="580" height="36" fill="#e5f5f2"/>
+<path d="M 48 191 H 628" stroke="#34a995" stroke-width="1.1"/>
+<text x="338" y="179" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">USERS</text>
+<rect x="48" y="191" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 193 191 V 343" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 411 191 V 343" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 498 191 V 343" stroke="#d5dce4" stroke-width=".8"/>
+<text x="55" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="199" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="417" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="504" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 48 213 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="230" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="230" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">user_id</text>
+<text x="417" y="230" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="504" y="230" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="239" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 239 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="256" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(320)</text>
+<text x="199" y="256" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">email</text>
+<text x="417" y="256" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">UK</text>
+<text x="504" y="256" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 265 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="282" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="282" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">password_hash</text>
+<text x="417" y="282" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="282" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="291" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 291 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="308" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="199" y="308" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="417" y="308" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="308" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 317 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="334" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="199" y="334" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">account_status</text>
+<text x="417" y="334" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="334" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="48" y="390" width="580" height="136" fill="#fff" stroke="#34a995" stroke-width="1.6"/>
+<rect x="48" y="390" width="580" height="36" fill="#e5f5f2"/>
+<path d="M 48 426 H 628" stroke="#34a995" stroke-width="1.1"/>
+<text x="338" y="414" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">ROLES</text>
+<rect x="48" y="426" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 193 426 V 526" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 411 426 V 526" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 498 426 V 526" stroke="#d5dce4" stroke-width=".8"/>
+<text x="55" y="441" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="199" y="441" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="417" y="441" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="504" y="441" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 48 448 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="465" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="465" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">role_id</text>
+<text x="417" y="465" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="504" y="465" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="474" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 474 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="491" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(40)</text>
+<text x="199" y="491" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">role_name</text>
+<text x="417" y="491" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">UK</text>
+<text x="504" y="491" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 500 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="517" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="517" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">description</text>
+<text x="417" y="517" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="517" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="48" y="565" width="580" height="136" fill="#fff" stroke="#34a995" stroke-width="1.6"/>
+<rect x="48" y="565" width="580" height="36" fill="#e5f5f2"/>
+<path d="M 48 601 H 628" stroke="#34a995" stroke-width="1.1"/>
+<text x="338" y="589" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">USER_ROLES</text>
+<rect x="48" y="601" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 193 601 V 701" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 411 601 V 701" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 498 601 V 701" stroke="#d5dce4" stroke-width=".8"/>
+<text x="55" y="616" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="199" y="616" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="417" y="616" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="504" y="616" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 48 623 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="640" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="640" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">user_id</text>
+<text x="417" y="640" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK1, FK</text>
+<text x="504" y="640" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="649" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 649 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="666" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="666" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">role_id</text>
+<text x="417" y="666" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK2, FK</text>
+<text x="504" y="666" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 675 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="692" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="199" y="692" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">assigned_at</text>
+<text x="417" y="692" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="692" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="48" y="750" width="580" height="240" fill="#fff" stroke="#34a995" stroke-width="1.6"/>
+<rect x="48" y="750" width="580" height="36" fill="#e5f5f2"/>
+<path d="M 48 786 H 628" stroke="#34a995" stroke-width="1.1"/>
+<text x="338" y="774" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">PROFILES</text>
+<rect x="48" y="786" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 193 786 V 990" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 411 786 V 990" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 498 786 V 990" stroke="#d5dce4" stroke-width=".8"/>
+<text x="55" y="801" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="199" y="801" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="417" y="801" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="504" y="801" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 48 808 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="825" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="825" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">profile_id</text>
+<text x="417" y="825" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="504" y="825" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="834" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 834 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="851" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="851" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">user_id</text>
+<text x="417" y="851" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, UK</text>
+<text x="504" y="851" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 860 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="877" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(120)</text>
+<text x="199" y="877" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">display_name</text>
+<text x="417" y="877" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="877" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="886" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 886 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="903" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="903" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">bio</text>
+<text x="417" y="903" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="903" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 48 912 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="929" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="929" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">avatar_url</text>
+<text x="417" y="929" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="929" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="49" y="938" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 938 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="955" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="955" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">website_url</text>
+<text x="417" y="955" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="955" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 48 964 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="981" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="199" y="981" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">updated_at</text>
+<text x="417" y="981" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="981" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1352" y="155" width="580" height="136" fill="#fff" stroke="#69a56f" stroke-width="1.6"/>
+<rect x="1352" y="155" width="580" height="36" fill="#edf6eb"/>
+<path d="M 1352 191 H 1932" stroke="#69a56f" stroke-width="1.1"/>
+<text x="1642" y="179" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">EQUIPMENT_CATEGORIES</text>
+<rect x="1352" y="191" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 1497 191 V 291" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1715 191 V 291" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1802 191 V 291" stroke="#d5dce4" stroke-width=".8"/>
+<text x="1359" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="1503" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="1721" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="1808" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 1352 213 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="230" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="1503" y="230" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">category_id</text>
+<text x="1721" y="230" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="1808" y="230" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="239" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 239 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="256" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(100)</text>
+<text x="1503" y="256" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">category_name</text>
+<text x="1721" y="256" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">UK</text>
+<text x="1808" y="256" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 265 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="282" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="1503" y="282" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">description</text>
+<text x="1721" y="282" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="282" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="48" y="1070" width="580" height="266" fill="#fff" stroke="#4c9fca" stroke-width="1.6"/>
+<rect x="48" y="1070" width="580" height="36" fill="#e8f4fb"/>
+<path d="M 48 1106 H 628" stroke="#4c9fca" stroke-width="1.1"/>
+<text x="338" y="1094" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">PODCASTS</text>
+<rect x="48" y="1106" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 193 1106 V 1336" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 411 1106 V 1336" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 498 1106 V 1336" stroke="#d5dce4" stroke-width=".8"/>
+<text x="55" y="1121" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="199" y="1121" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="417" y="1121" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="504" y="1121" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 48 1128 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1145" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="1145" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">podcast_id</text>
+<text x="417" y="1145" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="504" y="1145" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="1154" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1154 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1171" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="1171" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">creator_id</text>
+<text x="417" y="1171" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="504" y="1171" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 1180 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1197" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="199" y="1197" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">title</text>
+<text x="417" y="1197" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1197" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="1206" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1206 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1223" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="1223" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">description</text>
+<text x="417" y="1223" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1223" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 48 1232 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1249" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(100)</text>
+<text x="199" y="1249" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">category</text>
+<text x="417" y="1249" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1249" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="49" y="1258" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1258 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1275" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(35)</text>
+<text x="199" y="1275" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">language</text>
+<text x="417" y="1275" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1275" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 48 1284 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1301" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="199" y="1301" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="417" y="1301" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1301" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="1310" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1310 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1327" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="199" y="1327" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="417" y="1327" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1327" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="48" y="1375" width="580" height="292" fill="#fff" stroke="#4c9fca" stroke-width="1.6"/>
+<rect x="48" y="1375" width="580" height="36" fill="#e8f4fb"/>
+<path d="M 48 1411 H 628" stroke="#4c9fca" stroke-width="1.1"/>
+<text x="338" y="1399" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">EPISODES</text>
+<rect x="48" y="1411" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 193 1411 V 1667" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 411 1411 V 1667" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 498 1411 V 1667" stroke="#d5dce4" stroke-width=".8"/>
+<text x="55" y="1426" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="199" y="1426" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="417" y="1426" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="504" y="1426" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 48 1433 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1450" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="1450" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">episode_id</text>
+<text x="417" y="1450" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="504" y="1450" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="1459" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1459 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1476" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="199" y="1476" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">podcast_id</text>
+<text x="417" y="1476" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, CUQ1</text>
+<text x="504" y="1476" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 1485 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1502" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="199" y="1502" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">episode_number</text>
+<text x="417" y="1502" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">CUQ2</text>
+<text x="504" y="1502" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="49" y="1511" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1511 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1528" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="199" y="1528" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">title</text>
+<text x="417" y="1528" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1528" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 1537 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1554" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="1554" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">description</text>
+<text x="417" y="1554" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1554" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="49" y="1563" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1563 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1580" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="199" y="1580" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">media_url</text>
+<text x="417" y="1580" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1580" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 48 1589 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1606" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="199" y="1606" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">duration_seconds</text>
+<text x="417" y="1606" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1606" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="49" y="1615" width="578" height="26" fill="#f8fafc"/>
+<path d="M 48 1615 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1632" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="199" y="1632" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="417" y="1632" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1632" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 1641 H 628" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="55" y="1658" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="199" y="1658" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">published_at</text>
+<text x="417" y="1658" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="504" y="1658" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="700" y="155" width="580" height="266" fill="#fff" stroke="#d99a4e" stroke-width="1.6"/>
+<rect x="700" y="155" width="580" height="36" fill="#fff2e1"/>
+<path d="M 700 191 H 1280" stroke="#d99a4e" stroke-width="1.1"/>
+<text x="990" y="179" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">COURSES</text>
+<rect x="700" y="191" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 845 191 V 421" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1063 191 V 421" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1150 191 V 421" stroke="#d5dce4" stroke-width=".8"/>
+<text x="707" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="851" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="1069" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="1156" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 700 213 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="230" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="230" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">course_id</text>
+<text x="1069" y="230" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="1156" y="230" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="239" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 239 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="256" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="256" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">instructor_id</text>
+<text x="1069" y="256" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="1156" y="256" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 700 265 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="282" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="851" y="282" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">title</text>
+<text x="1069" y="282" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="282" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="291" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 291 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="308" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="851" y="308" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">description</text>
+<text x="1069" y="308" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="308" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 700 317 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="334" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="851" y="334" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">price</text>
+<text x="1069" y="334" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="334" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="343" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 343 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="360" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="851" y="360" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="1069" y="360" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="360" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 700 369 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="386" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="851" y="386" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="1069" y="386" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="386" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="395" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 395 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="412" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="851" y="412" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="1069" y="412" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="412" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="700" y="470" width="580" height="214" fill="#fff" stroke="#d99a4e" stroke-width="1.6"/>
+<rect x="700" y="470" width="580" height="36" fill="#fff2e1"/>
+<path d="M 700 506 H 1280" stroke="#d99a4e" stroke-width="1.1"/>
+<text x="990" y="494" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">LESSONS</text>
+<rect x="700" y="506" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 845 506 V 684" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1063 506 V 684" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1150 506 V 684" stroke="#d5dce4" stroke-width=".8"/>
+<text x="707" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="851" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="1069" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="1156" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 700 528 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="545" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="545" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">lesson_id</text>
+<text x="1069" y="545" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="1156" y="545" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="554" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 554 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="571" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="571" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">course_id</text>
+<text x="1069" y="571" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, CUQ1</text>
+<text x="1156" y="571" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 700 580 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="597" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="851" y="597" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">lesson_order</text>
+<text x="1069" y="597" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">CUQ2</text>
+<text x="1156" y="597" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="606" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 606 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="623" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="851" y="623" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">title</text>
+<text x="1069" y="623" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="623" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 700 632 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="649" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="851" y="649" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">content_url</text>
+<text x="1069" y="649" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="649" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="701" y="658" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 658 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="675" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="851" y="675" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">duration_seconds</text>
+<text x="1069" y="675" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="675" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="700" y="735" width="580" height="188" fill="#fff" stroke="#d99a4e" stroke-width="1.6"/>
+<rect x="700" y="735" width="580" height="36" fill="#fff2e1"/>
+<path d="M 700 771 H 1280" stroke="#d99a4e" stroke-width="1.1"/>
+<text x="990" y="759" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">ENROLLMENTS</text>
+<rect x="700" y="771" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 845 771 V 923" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1063 771 V 923" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1150 771 V 923" stroke="#d5dce4" stroke-width=".8"/>
+<text x="707" y="786" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="851" y="786" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="1069" y="786" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="1156" y="786" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 700 793 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="810" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="810" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">enrollment_id</text>
+<text x="1069" y="810" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="1156" y="810" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="819" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 819 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="836" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="836" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">user_id</text>
+<text x="1069" y="836" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, CUQ1</text>
+<text x="1156" y="836" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 700 845 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="862" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="862" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">course_id</text>
+<text x="1069" y="862" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, CUQ2</text>
+<text x="1156" y="862" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="871" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 871 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="888" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="851" y="888" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">enrolled_at</text>
+<text x="1069" y="888" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="888" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 700 897 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="914" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="851" y="914" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="1069" y="914" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="914" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="700" y="970" width="580" height="188" fill="#fff" stroke="#d99a4e" stroke-width="1.6"/>
+<rect x="700" y="970" width="580" height="36" fill="#fff2e1"/>
+<path d="M 700 1006 H 1280" stroke="#d99a4e" stroke-width="1.1"/>
+<text x="990" y="994" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">LESSON_PROGRESS</text>
+<rect x="700" y="1006" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 845 1006 V 1158" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1063 1006 V 1158" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1150 1006 V 1158" stroke="#d5dce4" stroke-width=".8"/>
+<text x="707" y="1021" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="851" y="1021" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="1069" y="1021" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="1156" y="1021" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 700 1028 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="1045" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="1045" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">user_id</text>
+<text x="1069" y="1045" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK1, FK</text>
+<text x="1156" y="1045" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="1054" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 1054 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="1071" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="851" y="1071" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">lesson_id</text>
+<text x="1069" y="1071" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK2, FK</text>
+<text x="1156" y="1071" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 700 1080 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="1097" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">boolean</text>
+<text x="851" y="1097" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">is_completed</text>
+<text x="1069" y="1097" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="1097" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="701" y="1106" width="578" height="26" fill="#f8fafc"/>
+<path d="M 700 1106 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="1123" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="851" y="1123" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">completed_at</text>
+<text x="1069" y="1123" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="1123" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 700 1132 H 1280" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="707" y="1149" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="851" y="1149" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">updated_at</text>
+<text x="1069" y="1149" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1156" y="1149" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1352" y="325" width="580" height="292" fill="#fff" stroke="#69a56f" stroke-width="1.6"/>
+<rect x="1352" y="325" width="580" height="36" fill="#edf6eb"/>
+<path d="M 1352 361 H 1932" stroke="#69a56f" stroke-width="1.1"/>
+<text x="1642" y="349" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">EQUIPMENT</text>
+<rect x="1352" y="361" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 1497 361 V 617" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1715 361 V 617" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1802 361 V 617" stroke="#d5dce4" stroke-width=".8"/>
+<text x="1359" y="376" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="1503" y="376" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="1721" y="376" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="1808" y="376" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 1352 383 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="400" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="1503" y="400" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">equipment_id</text>
+<text x="1721" y="400" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="1808" y="400" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="409" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 409 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="426" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="1503" y="426" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">provider_id</text>
+<text x="1721" y="426" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="1808" y="426" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 435 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="452" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="1503" y="452" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">category_id</text>
+<text x="1721" y="452" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="1808" y="452" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="461" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 461 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="478" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="1503" y="478" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">equipment_name</text>
+<text x="1721" y="478" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="478" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 487 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="504" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="1503" y="504" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">description</text>
+<text x="1721" y="504" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="504" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="1353" y="513" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 513 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="530" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="1503" y="530" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">daily_rate</text>
+<text x="1721" y="530" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="530" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 539 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="556" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="1503" y="556" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="1721" y="556" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="556" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="565" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 565 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="582" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="1503" y="582" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">quantity</text>
+<text x="1721" y="582" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="582" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 591 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="608" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="1503" y="608" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">equipment_status</text>
+<text x="1721" y="608" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="608" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1352" y="665" width="580" height="318" fill="#fff" stroke="#69a56f" stroke-width="1.6"/>
+<rect x="1352" y="665" width="580" height="36" fill="#edf6eb"/>
+<path d="M 1352 701 H 1932" stroke="#69a56f" stroke-width="1.1"/>
+<text x="1642" y="689" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">RENTALS</text>
+<rect x="1352" y="701" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 1497 701 V 983" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1715 701 V 983" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 1802 701 V 983" stroke="#d5dce4" stroke-width=".8"/>
+<text x="1359" y="716" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="1503" y="716" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="1721" y="716" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="1808" y="716" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 1352 723 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="740" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="1503" y="740" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">rental_id</text>
+<text x="1721" y="740" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="1808" y="740" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="749" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 749 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="766" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="1503" y="766" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">equipment_id</text>
+<text x="1721" y="766" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="1808" y="766" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 775 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="792" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="1503" y="792" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">renter_id</text>
+<text x="1721" y="792" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="1808" y="792" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="801" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 801 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="818" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">date</text>
+<text x="1503" y="818" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">start_date</text>
+<text x="1721" y="818" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="818" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 827 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="844" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">date</text>
+<text x="1503" y="844" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">end_date</text>
+<text x="1721" y="844" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="844" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="853" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 853 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="870" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="1503" y="870" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">quantity</text>
+<text x="1721" y="870" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="870" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 879 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="896" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="1503" y="896" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">agreed_rate</text>
+<text x="1721" y="896" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="896" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="905" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 905 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="922" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="1503" y="922" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="1721" y="922" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="922" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 1352 931 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="948" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="1503" y="948" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="1721" y="948" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="948" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="1353" y="957" width="578" height="26" fill="#f8fafc"/>
+<path d="M 1352 957 H 1932" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="1359" y="974" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="1503" y="974" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="1721" y="974" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="1808" y="974" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2004" y="155" width="580" height="266" fill="#fff" stroke="#9876bd" stroke-width="1.6"/>
+<rect x="2004" y="155" width="580" height="36" fill="#f2ecf8"/>
+<path d="M 2004 191 H 2584" stroke="#9876bd" stroke-width="1.1"/>
+<text x="2294" y="179" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">STUDIOS</text>
+<rect x="2004" y="191" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2149 191 V 421" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2367 191 V 421" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2454 191 V 421" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2011" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2155" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="2373" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="2460" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2004 213 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="230" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="230" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">studio_id</text>
+<text x="2373" y="230" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="2460" y="230" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="239" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 239 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="256" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="256" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">provider_id</text>
+<text x="2373" y="256" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="2460" y="256" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 265 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="282" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="2155" y="282" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">studio_name</text>
+<text x="2373" y="282" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="282" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="291" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 291 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="308" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="2155" y="308" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">location</text>
+<text x="2373" y="308" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="308" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 317 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="334" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="2155" y="334" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">capacity</text>
+<text x="2373" y="334" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="334" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="343" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 343 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="360" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="2155" y="360" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">hourly_rate</text>
+<text x="2373" y="360" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="360" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 369 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="386" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="2155" y="386" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="2373" y="386" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="386" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="395" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 395 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="412" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2155" y="412" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="2373" y="412" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="412" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2004" y="470" width="580" height="292" fill="#fff" stroke="#9876bd" stroke-width="1.6"/>
+<rect x="2004" y="470" width="580" height="36" fill="#f2ecf8"/>
+<path d="M 2004 506 H 2584" stroke="#9876bd" stroke-width="1.1"/>
+<text x="2294" y="494" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">STUDIO_BOOKINGS</text>
+<rect x="2004" y="506" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2149 506 V 762" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2367 506 V 762" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2454 506 V 762" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2011" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2155" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="2373" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="2460" y="521" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2004 528 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="545" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="545" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">booking_id</text>
+<text x="2373" y="545" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="2460" y="545" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="554" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 554 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="571" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="571" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">studio_id</text>
+<text x="2373" y="571" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="2460" y="571" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 580 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="597" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="597" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">customer_id</text>
+<text x="2373" y="597" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="2460" y="597" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="606" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 606 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="623" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2155" y="623" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">start_time</text>
+<text x="2373" y="623" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="623" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 632 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="649" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2155" y="649" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">end_time</text>
+<text x="2373" y="649" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="649" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="658" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 658 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="675" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="2155" y="675" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">agreed_rate</text>
+<text x="2373" y="675" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="675" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 684 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="701" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="2155" y="701" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="2373" y="701" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="701" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="710" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 710 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="727" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2155" y="727" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="2373" y="727" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="727" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 736 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="753" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2155" y="753" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="2373" y="753" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="753" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2004" y="810" width="580" height="240" fill="#fff" stroke="#9876bd" stroke-width="1.6"/>
+<rect x="2004" y="810" width="580" height="36" fill="#f2ecf8"/>
+<path d="M 2004 846 H 2584" stroke="#9876bd" stroke-width="1.1"/>
+<text x="2294" y="834" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">SERVICES</text>
+<rect x="2004" y="846" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2149 846 V 1050" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2367 846 V 1050" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2454 846 V 1050" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2011" y="861" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2155" y="861" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="2373" y="861" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="2460" y="861" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2004 868 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="885" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="885" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">service_id</text>
+<text x="2373" y="885" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="2460" y="885" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="894" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 894 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="911" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="911" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">provider_id</text>
+<text x="2373" y="911" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="2460" y="911" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 920 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="937" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="2155" y="937" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">service_name</text>
+<text x="2373" y="937" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="937" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="946" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 946 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="963" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="2155" y="963" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">description</text>
+<text x="2373" y="963" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="963" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2004 972 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="989" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="2155" y="989" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">price</text>
+<text x="2373" y="989" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="989" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="998" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 998 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1015" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="2155" y="1015" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="2373" y="1015" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1015" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 1024 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1041" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2155" y="1041" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="2373" y="1041" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1041" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2004" y="1090" width="580" height="318" fill="#fff" stroke="#9876bd" stroke-width="1.6"/>
+<rect x="2004" y="1090" width="580" height="36" fill="#f2ecf8"/>
+<path d="M 2004 1126 H 2584" stroke="#9876bd" stroke-width="1.1"/>
+<text x="2294" y="1114" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">SERVICE_ORDERS</text>
+<rect x="2004" y="1126" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2149 1126 V 1408" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2367 1126 V 1408" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 2454 1126 V 1408" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2011" y="1141" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2155" y="1141" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="2373" y="1141" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="2460" y="1141" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2004 1148 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1165" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="1165" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">service_order_id</text>
+<text x="2373" y="1165" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="2460" y="1165" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="1174" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 1174 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1191" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="1191" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">service_id</text>
+<text x="2373" y="1191" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="2460" y="1191" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 1200 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1217" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2155" y="1217" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">customer_id</text>
+<text x="2373" y="1217" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="2460" y="1217" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="1226" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 1226 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1243" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="2155" y="1243" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">agreed_price</text>
+<text x="2373" y="1243" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1243" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 1252 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1269" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="2155" y="1269" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="2373" y="1269" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1269" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="1278" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 1278 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1295" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="2155" y="1295" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">requirements</text>
+<text x="2373" y="1295" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1295" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2004 1304 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1321" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2155" y="1321" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">scheduled_at</text>
+<text x="2373" y="1321" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1321" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2005" y="1330" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 1330 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1347" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2155" y="1347" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="2373" y="1347" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1347" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2004 1356 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1373" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2155" y="1373" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="2373" y="1373" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1373" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2005" y="1382" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2004 1382 H 2584" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2011" y="1399" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2155" y="1399" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">completed_at</text>
+<text x="2373" y="1399" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="2460" y="1399" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2656" y="155" width="580" height="292" fill="#fff" stroke="#bc9b32" stroke-width="1.6"/>
+<rect x="2656" y="155" width="580" height="36" fill="#fbf5dc"/>
+<path d="M 2656 191 H 3236" stroke="#bc9b32" stroke-width="1.1"/>
+<text x="2946" y="179" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">PAYMENTS</text>
+<rect x="2656" y="191" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2801 191 V 447" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3019 191 V 447" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3106 191 V 447" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2663" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2807" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="3025" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="3112" y="206" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2656 213 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="230" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="230" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payment_id</text>
+<text x="3025" y="230" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="3112" y="230" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="239" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 239 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="256" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="256" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payer_id</text>
+<text x="3025" y="256" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="3112" y="256" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 265 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="282" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="2807" y="282" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">amount</text>
+<text x="3025" y="282" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="282" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="291" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 291 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="308" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="2807" y="308" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="3025" y="308" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="308" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 317 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="334" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(40)</text>
+<text x="2807" y="334" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payment_method</text>
+<text x="3025" y="334" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="334" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="343" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 343 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="360" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2807" y="360" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payment_status</text>
+<text x="3025" y="360" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="360" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 369 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="386" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="2807" y="386" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payment_reference</text>
+<text x="3025" y="386" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PUQ</text>
+<text x="3112" y="386" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2657" y="395" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 395 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="412" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="412" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="3025" y="412" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="412" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 421 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="438" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="438" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">paid_at</text>
+<text x="3025" y="438" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="438" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2656" y="495" width="580" height="240" fill="#fff" stroke="#bc9b32" stroke-width="1.6"/>
+<rect x="2656" y="495" width="580" height="36" fill="#fbf5dc"/>
+<path d="M 2656 531 H 3236" stroke="#bc9b32" stroke-width="1.1"/>
+<text x="2946" y="519" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">TRANSACTIONS</text>
+<rect x="2656" y="531" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2801 531 V 735" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3019 531 V 735" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3106 531 V 735" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2663" y="546" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2807" y="546" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="3025" y="546" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="3112" y="546" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2656 553 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="570" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="570" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">transaction_id</text>
+<text x="3025" y="570" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="3112" y="570" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="579" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 579 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="596" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="596" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payment_id</text>
+<text x="3025" y="596" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="3112" y="596" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 605 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="622" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(30)</text>
+<text x="2807" y="622" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">transaction_type</text>
+<text x="3025" y="622" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="622" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="631" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 631 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="648" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="2807" y="648" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">amount</text>
+<text x="3025" y="648" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="648" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 657 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="674" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2807" y="674" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">transaction_status</text>
+<text x="3025" y="674" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="674" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="683" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 683 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="700" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="2807" y="700" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">provider_reference</text>
+<text x="3025" y="700" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PUQ</text>
+<text x="3112" y="700" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2656 709 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="726" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="726" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="3025" y="726" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="726" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2656" y="780" width="580" height="266" fill="#fff" stroke="#bc9b32" stroke-width="1.6"/>
+<rect x="2656" y="780" width="580" height="36" fill="#fbf5dc"/>
+<path d="M 2656 816 H 3236" stroke="#bc9b32" stroke-width="1.1"/>
+<text x="2946" y="804" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">PAYOUTS</text>
+<rect x="2656" y="816" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2801 816 V 1046" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3019 816 V 1046" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3106 816 V 1046" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2663" y="831" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2807" y="831" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="3025" y="831" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="3112" y="831" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2656 838 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="855" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="855" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payout_id</text>
+<text x="3025" y="855" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="3112" y="855" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="864" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 864 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="881" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="881" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">provider_id</text>
+<text x="3025" y="881" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="3112" y="881" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 890 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="907" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">numeric(12,2)</text>
+<text x="2807" y="907" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">amount</text>
+<text x="3025" y="907" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="907" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="916" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 916 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="933" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">char(3)</text>
+<text x="2807" y="933" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">currency</text>
+<text x="3025" y="933" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="933" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 942 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="959" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2807" y="959" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">status</text>
+<text x="3025" y="959" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="959" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="968" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 968 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="985" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="2807" y="985" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">payout_reference</text>
+<text x="3025" y="985" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PUQ</text>
+<text x="3112" y="985" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2656 994 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1011" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="1011" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="3025" y="1011" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1011" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="1020" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1020 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1037" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="1037" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">paid_at</text>
+<text x="3025" y="1037" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1037" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2656" y="1085" width="580" height="318" fill="#fff" stroke="#cf7770" stroke-width="1.6"/>
+<rect x="2656" y="1085" width="580" height="36" fill="#faecea"/>
+<path d="M 2656 1121 H 3236" stroke="#cf7770" stroke-width="1.1"/>
+<text x="2946" y="1109" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">REVIEWS</text>
+<rect x="2656" y="1121" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2801 1121 V 1403" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3019 1121 V 1403" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3106 1121 V 1403" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2663" y="1136" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2807" y="1136" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="3025" y="1136" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="3112" y="1136" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2656 1143 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1160" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1160" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">review_id</text>
+<text x="3025" y="1160" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="3112" y="1160" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="1169" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1169 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1186" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1186" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">reviewer_id</text>
+<text x="3025" y="1186" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, PUQ2</text>
+<text x="3112" y="1186" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 1195 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1212" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1212" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">reviewed_user_id</text>
+<text x="3025" y="1212" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, PUQ1</text>
+<text x="3112" y="1212" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2657" y="1221" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1221 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1238" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1238" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">equipment_id</text>
+<text x="3025" y="1238" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, PUQ1</text>
+<text x="3112" y="1238" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2656 1247 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1264" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1264" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">studio_id</text>
+<text x="3025" y="1264" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, PUQ1</text>
+<text x="3112" y="1264" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2657" y="1273" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1273 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1290" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1290" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">service_id</text>
+<text x="3025" y="1290" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, PUQ1</text>
+<text x="3112" y="1290" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2656 1299 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1316" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1316" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">course_id</text>
+<text x="3025" y="1316" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, PUQ1</text>
+<text x="3112" y="1316" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2657" y="1325" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1325 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1342" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">smallint</text>
+<text x="2807" y="1342" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">rating</text>
+<text x="3025" y="1342" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1342" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 1351 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1368" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="2807" y="1368" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">review_text</text>
+<text x="3025" y="1368" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1368" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2657" y="1377" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1377 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1394" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="1394" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="3025" y="1394" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1394" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2656" y="1450" width="580" height="266" fill="#fff" stroke="#6483bd" stroke-width="1.6"/>
+<rect x="2656" y="1450" width="580" height="36" fill="#edf1fa"/>
+<path d="M 2656 1486 H 3236" stroke="#6483bd" stroke-width="1.1"/>
+<text x="2946" y="1474" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">CREATOR_PLANS</text>
+<rect x="2656" y="1486" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2801 1486 V 1716" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3019 1486 V 1716" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3106 1486 V 1716" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2663" y="1501" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2807" y="1501" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="3025" y="1501" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="3112" y="1501" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2656 1508 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1525" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1525" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">plan_id</text>
+<text x="3025" y="1525" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="3112" y="1525" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="1534" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1534 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1551" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1551" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">creator_id</text>
+<text x="3025" y="1551" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK</text>
+<text x="3112" y="1551" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 1560 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1577" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="2807" y="1577" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">plan_title</text>
+<text x="3025" y="1577" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1577" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="1586" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1586 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1603" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">text</text>
+<text x="2807" y="1603" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">podcast_idea</text>
+<text x="3025" y="1603" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1603" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2656 1612 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1629" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">date</text>
+<text x="2807" y="1629" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">target_launch_date</text>
+<text x="3025" y="1629" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1629" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2657" y="1638" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1638 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1655" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2807" y="1655" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">plan_status</text>
+<text x="3025" y="1655" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1655" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 1664 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1681" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="1681" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="3025" y="1681" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1681" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="1690" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1690 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1707" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="1707" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">updated_at</text>
+<text x="3025" y="1707" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1707" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2656" y="1760" width="580" height="266" fill="#fff" stroke="#6483bd" stroke-width="1.6"/>
+<rect x="2656" y="1760" width="580" height="36" fill="#edf1fa"/>
+<path d="M 2656 1796 H 3236" stroke="#6483bd" stroke-width="1.1"/>
+<text x="2946" y="1784" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#202b3a">PLAN_TASKS</text>
+<rect x="2656" y="1796" width="580" height="22" fill="#f2f5f8"/>
+<path d="M 2801 1796 V 2026" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3019 1796 V 2026" stroke="#d5dce4" stroke-width=".8"/>
+<path d="M 3106 1796 V 2026" stroke="#d5dce4" stroke-width=".8"/>
+<text x="2663" y="1811" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">TYPE</text>
+<text x="2807" y="1811" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">COLUMN</text>
+<text x="3025" y="1811" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">KEY</text>
+<text x="3112" y="1811" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#627184">NULL</text>
+<path d="M 2656 1818 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1835" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1835" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">task_id</text>
+<text x="3025" y="1835" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">PK</text>
+<text x="3112" y="1835" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="1844" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1844 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1861" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">bigint</text>
+<text x="2807" y="1861" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">plan_id</text>
+<text x="3025" y="1861" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">FK, CUQ1</text>
+<text x="3112" y="1861" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 1870 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1887" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(200)</text>
+<text x="2807" y="1887" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">task_title</text>
+<text x="3025" y="1887" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1887" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="1896" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1896 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1913" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(80)</text>
+<text x="2807" y="1913" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">task_category</text>
+<text x="3025" y="1913" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1913" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<path d="M 2656 1922 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1939" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">date</text>
+<text x="2807" y="1939" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">due_date</text>
+<text x="3025" y="1939" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1939" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NULL</text>
+<rect x="2657" y="1948" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 1948 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1965" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">varchar(20)</text>
+<text x="2807" y="1965" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">task_status</text>
+<text x="3025" y="1965" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="1965" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 2656 1974 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="1991" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">integer</text>
+<text x="2807" y="1991" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">task_order</text>
+<text x="3025" y="1991" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b">CUQ2</text>
+<text x="3112" y="1991" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<rect x="2657" y="2000" width="578" height="26" fill="#f8fafc"/>
+<path d="M 2656 2000 H 3236" stroke="#e1e6ec" stroke-width=".65"/>
+<text x="2663" y="2017" font-family="Arial,sans-serif" font-size="11" fill="#4c5a6b">timestamptz</text>
+<text x="2807" y="2017" font-family="Arial,sans-serif" font-size="12" fill="#202b3a">created_at</text>
+<text x="3025" y="2017" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#354d6b"></text>
+<text x="3112" y="2017" font-family="Arial,sans-serif" font-size="10" fill="#4c5a6b">NOT NULL</text>
+<path d="M 48 2044 H 3192" stroke="#d8dee6" stroke-width="1"/>
+<text x="48" y="2064" font-family="Arial,sans-serif" font-size="12" fill="#48576a">PK primary key · FK foreign key · UK single-column unique · CUQ1/CUQ2 composite UNIQUE parts · PUQ nullable single-column partial UNIQUE · PUQ1/PUQ2 partial composite UNIQUE parts · NULL shows nullability</text>
+<text x="48" y="2087" font-family="Arial,sans-serif" font-size="12" fill="#48576a">PUQ indexes apply only to rows meeting their predicate. Line ends: bar = 1, circle = optional, crow's foot = many. Review author and user target are separate links.</text>
+<text x="48" y="2120" font-family="Arial,sans-serif" font-size="11" fill="#48576a">Review uniqueness 1/5: uq_reviews_user_target_reviewer (reviewed_user_id, reviewer_id) WHERE reviewed_user_id IS NOT NULL</text>
+<text x="48" y="2143" font-family="Arial,sans-serif" font-size="11" fill="#48576a">Review uniqueness 2/5: uq_reviews_equipment_target_reviewer (equipment_id, reviewer_id) WHERE equipment_id IS NOT NULL</text>
+<text x="48" y="2166" font-family="Arial,sans-serif" font-size="11" fill="#48576a">Review uniqueness 3/5: uq_reviews_studio_target_reviewer (studio_id, reviewer_id) WHERE studio_id IS NOT NULL</text>
+<text x="48" y="2189" font-family="Arial,sans-serif" font-size="11" fill="#48576a">Review uniqueness 4/5: uq_reviews_service_target_reviewer (service_id, reviewer_id) WHERE service_id IS NOT NULL</text>
+<text x="48" y="2212" font-family="Arial,sans-serif" font-size="11" fill="#48576a">Review uniqueness 5/5: uq_reviews_course_target_reviewer (course_id, reviewer_id) WHERE course_id IS NOT NULL</text>
+</svg>
