@@ -42,10 +42,7 @@ PodSphere_AP_2026/
 │   ├── 04_queries.sql            # CP3: planned SQL query workload
 │   ├── 05_query_timings.md       # CP4: planned query timing analysis
 │   └── plans/                    # CP4: planned EXPLAIN/query-plan evidence
-└── diagrams/
-    ├── er_diagram.png            # Visual ERD for reports and review
-    ├── er_diagram.svg            # Scalable vector export
-    └── er_diagram.drawio         # Editable diagrams.net source
+
 ```
 
 The CP3 and CP4 paths show the planned deliverable layout; they are not complete until the corresponding files and evidence are added and committed.
