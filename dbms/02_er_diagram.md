@@ -6,9 +6,9 @@ This logical ER diagram carries forward all 23 relations from CP1. Relation name
 
 ## Visual diagram
 
-![PodSphere PostgreSQL ER diagram](../diagrams/er_diagram.png)
+![PodSphere PostgreSQL ER diagram](02_er_diagram.png)
 
-[PNG](../diagrams/er_diagram.png) · [SVG](../diagrams/er_diagram.svg) · [Editable diagrams.net source](../diagrams/er_diagram.drawio)
+[ER diagram PNG](02_er_diagram.png)
 
 ```mermaid
 erDiagram
