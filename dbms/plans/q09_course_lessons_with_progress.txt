@@ -1,0 +1,46 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q09
+-- Section: Section 5: Courses & Learning
+-- Description: List lessons for a course with authenticated learner's completion status
+-- Source File: dbms/04_queries.sql
+
+                                                                       QUERY PLAN                                                                        
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=51.98..52.01 rows=10 width=116) (actual time=0.075..0.077 rows=10.00 loops=1)
+   Output: l.lesson_id, l.course_id, l.lesson_order, l.title, l.content_url, l.duration_seconds, (COALESCE(lp.is_completed, false)), lp.completed_at
+   Sort Key: l.lesson_order
+   Sort Method: quicksort  Memory: 26kB
+   Buffers: shared hit=26
+   ->  Hash Left Join  (cost=27.88..51.82 rows=10 width=116) (actual time=0.045..0.062 rows=10.00 loops=1)
+         Output: l.lesson_id, l.course_id, l.lesson_order, l.title, l.content_url, l.duration_seconds, COALESCE(lp.is_completed, false), lp.completed_at
+         Inner Unique: true
+         Hash Cond: (l.lesson_id = lp.lesson_id)
+         Buffers: shared hit=23
+         ->  Bitmap Heap Scan on public.lessons l  (cost=4.36..28.27 rows=10 width=107) (actual time=0.016..0.031 rows=10.00 loops=1)
+               Output: l.lesson_id, l.course_id, l.lesson_order, l.title, l.content_url, l.duration_seconds
+               Recheck Cond: (l.course_id = 5)
+               Heap Blocks: exact=10
+               Buffers: shared hit=15
+               ->  Bitmap Index Scan on uq_lessons_course_order  (cost=0.00..4.36 rows=10 width=0) (actual time=0.009..0.009 rows=10.00 loops=1)
+                     Index Cond: (l.course_id = 5)
+                     Index Searches: 1
+                     Buffers: shared hit=5
+         ->  Hash  (cost=23.45..23.45 rows=6 width=17) (actual time=0.024..0.025 rows=6.00 loops=1)
+               Output: lp.is_completed, lp.completed_at, lp.lesson_id
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=8
+               ->  Bitmap Heap Scan on public.lesson_progress lp  (cost=4.33..23.45 rows=6 width=17) (actual time=0.011..0.019 rows=6.00 loops=1)
+                     Output: lp.is_completed, lp.completed_at, lp.lesson_id
+                     Recheck Cond: (lp.user_id = 42)
+                     Heap Blocks: exact=6
+                     Buffers: shared hit=8
+                     ->  Bitmap Index Scan on pk_lesson_progress  (cost=0.00..4.33 rows=6 width=0) (actual time=0.005..0.005 rows=6.00 loops=1)
+                           Index Cond: (lp.user_id = 42)
+                           Index Searches: 1
+                           Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=262
+ Planning Time: 0.347 ms
+ Execution Time: 0.124 ms
+(36 rows)
+

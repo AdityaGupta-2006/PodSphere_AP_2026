@@ -1,0 +1,45 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q27
+-- Section: Section 12: Analytics & Dashboards
+-- Description: Studio booking utilization and revenue metrics
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                                                                                                                                                                                        QUERY PLAN                                                                                                                                                                                                                                                                                                                        
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=32.54..32.54 rows=1 width=180) (actual time=0.115..0.116 rows=1.00 loops=1)
+   Output: s.studio_id, s.studio_name, s.location, s.hourly_rate, s.currency, s.status, (count(sb.booking_id)), (count(sb.booking_id) FILTER (WHERE ((sb.status)::text = 'confirmed'::text))), (count(sb.booking_id) FILTER (WHERE ((sb.status)::text = 'completed'::text))), (COALESCE(sum((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0)) FILTER (WHERE ((sb.status)::text = ANY ('{confirmed,completed}'::text[]))), '0'::numeric)), (COALESCE(sum(round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2)) FILTER (WHERE ((sb.status)::text = ANY ('{confirmed,completed}'::text[]))), '0'::numeric))
+   Sort Key: (COALESCE(sum(round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2)) FILTER (WHERE ((sb.status)::text = ANY ('{confirmed,completed}'::text[]))), '0'::numeric)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=25
+   ->  GroupAggregate  (cost=31.90..32.53 rows=1 width=180) (actual time=0.102..0.103 rows=1.00 loops=1)
+         Output: s.studio_id, s.studio_name, s.location, s.hourly_rate, s.currency, s.status, count(sb.booking_id), count(sb.booking_id) FILTER (WHERE ((sb.status)::text = 'confirmed'::text)), count(sb.booking_id) FILTER (WHERE ((sb.status)::text = 'completed'::text)), COALESCE(sum((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0)) FILTER (WHERE ((sb.status)::text = ANY ('{confirmed,completed}'::text[]))), '0'::numeric), COALESCE(sum(round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2)) FILTER (WHERE ((sb.status)::text = ANY ('{confirmed,completed}'::text[]))), '0'::numeric)
+         Group Key: s.studio_id
+         Buffers: shared hit=22
+         ->  Sort  (cost=31.90..31.93 rows=13 width=131) (actual time=0.068..0.069 rows=14.00 loops=1)
+               Output: s.studio_id, s.studio_name, s.location, s.hourly_rate, s.currency, s.status, sb.booking_id, sb.status, sb.end_time, sb.start_time, sb.agreed_rate
+               Sort Key: s.studio_id
+               Sort Method: quicksort  Memory: 27kB
+               Buffers: shared hit=22
+               ->  Nested Loop Left Join  (cost=4.38..31.66 rows=13 width=131) (actual time=0.013..0.051 rows=14.00 loops=1)
+                     Output: s.studio_id, s.studio_name, s.location, s.hourly_rate, s.currency, s.status, sb.booking_id, sb.status, sb.end_time, sb.start_time, sb.agreed_rate
+                     Buffers: shared hit=19
+                     ->  Seq Scan on public.studios s  (cost=0.00..4.88 rows=1 width=92) (actual time=0.004..0.015 rows=1.00 loops=1)
+                           Output: s.studio_id, s.provider_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status
+                           Filter: (s.provider_id = 401)
+                           Rows Removed by Filter: 149
+                           Buffers: shared hit=3
+                     ->  Bitmap Heap Scan on public.studio_bookings sb  (cost=4.38..26.65 rows=13 width=47) (actual time=0.007..0.032 rows=14.00 loops=1)
+                           Output: sb.booking_id, sb.studio_id, sb.customer_id, sb.start_time, sb.end_time, sb.agreed_rate, sb.currency, sb.status, sb.created_at
+                           Recheck Cond: (s.studio_id = sb.studio_id)
+                           Heap Blocks: exact=14
+                           Buffers: shared hit=16
+                           ->  Bitmap Index Scan on ix_studio_bookings_studio_id  (cost=0.00..4.38 rows=13 width=0) (actual time=0.003..0.003 rows=14.00 loops=1)
+                                 Index Cond: (sb.studio_id = s.studio_id)
+                                 Index Searches: 1
+                                 Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=255
+ Planning Time: 0.914 ms
+ Execution Time: 0.169 ms
+(35 rows)
+

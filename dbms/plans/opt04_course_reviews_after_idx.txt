@@ -1,0 +1,27 @@
+-- PodSphere CP4 Index Experiment (AFTER Index Creation)
+-- Experiment: EXP4_reviews_course_created_at
+-- Description: Partial composite index on reviews(course_id, created_at DESC) for target reviews chronological feed
+-- Applied DDL: CREATE INDEX idx_reviews_course_created_at ON reviews (course_id, created_at DESC) WHERE course_id IS NOT NULL;
+
+                                                                  QUERY PLAN                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=17.79..17.80 rows=4 width=97) (actual time=0.023..0.023 rows=4.00 loops=1)
+   Output: review_id, course_id, reviewer_id, rating, review_text, created_at
+   Sort Key: r.created_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=12
+   ->  Bitmap Heap Scan on public.reviews r  (cost=4.31..17.75 rows=4 width=97) (actual time=0.010..0.014 rows=4.00 loops=1)
+         Output: review_id, course_id, reviewer_id, rating, review_text, created_at
+         Recheck Cond: (r.course_id = 25)
+         Heap Blocks: exact=4
+         Buffers: shared hit=9
+         ->  Bitmap Index Scan on idx_reviews_course_created_at  (cost=0.00..4.31 rows=4 width=0) (actual time=0.004..0.004 rows=4.00 loops=1)
+               Index Cond: (r.course_id = 25)
+               Index Searches: 1
+               Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=211
+ Planning Time: 0.317 ms
+ Execution Time: 0.042 ms
+(18 rows)
+

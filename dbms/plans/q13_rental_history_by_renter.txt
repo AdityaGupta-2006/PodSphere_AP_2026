@@ -1,0 +1,56 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q13
+-- Section: Section 6: Equipment & Rentals
+-- Description: List rental history for a renter
+-- Source File: dbms/04_queries.sql
+
+                                                                                     QUERY PLAN                                                                                      
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=29.16..29.16 rows=2 width=100) (actual time=0.068..0.069 rows=1.00 loops=1)
+   Output: r.rental_id, r.equipment_id, eq.equipment_name, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at, pr.display_name
+   Sort Key: r.created_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=18
+   ->  Nested Loop Left Join  (cost=5.13..29.15 rows=2 width=100) (actual time=0.048..0.050 rows=1.00 loops=1)
+         Output: r.rental_id, r.equipment_id, eq.equipment_name, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at, pr.display_name
+         Inner Unique: true
+         Buffers: shared hit=15
+         ->  Nested Loop  (cost=4.85..28.29 rows=2 width=96) (actual time=0.039..0.040 rows=1.00 loops=1)
+               Output: r.rental_id, r.equipment_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at, eq.equipment_name, u.user_id
+               Inner Unique: true
+               Buffers: shared hit=12
+               ->  Nested Loop  (cost=4.57..27.59 rows=2 width=96) (actual time=0.031..0.031 rows=1.00 loops=1)
+                     Output: r.rental_id, r.equipment_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at, eq.equipment_name, eq.provider_id
+                     Inner Unique: true
+                     Buffers: shared hit=9
+                     ->  Bitmap Heap Scan on public.rentals r  (cost=4.30..10.98 rows=2 width=55) (actual time=0.022..0.022 rows=1.00 loops=1)
+                           Output: r.rental_id, r.equipment_id, r.renter_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at
+                           Recheck Cond: (r.renter_id = 42)
+                           Heap Blocks: exact=1
+                           Buffers: shared hit=6
+                           ->  Bitmap Index Scan on ix_rentals_renter_id  (cost=0.00..4.29 rows=2 width=0) (actual time=0.012..0.012 rows=1.00 loops=1)
+                                 Index Cond: (r.renter_id = 42)
+                                 Index Searches: 1
+                                 Buffers: shared hit=5
+                     ->  Index Scan using pk_equipment on public.equipment eq  (cost=0.28..8.29 rows=1 width=49) (actual time=0.003..0.003 rows=1.00 loops=1)
+                           Output: eq.equipment_id, eq.provider_id, eq.category_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status
+                           Index Cond: (eq.equipment_id = r.equipment_id)
+                           Index Searches: 1
+                           Buffers: shared hit=3
+               ->  Index Only Scan using pk_users on public.users u  (cost=0.28..0.35 rows=1 width=8) (actual time=0.007..0.007 rows=1.00 loops=1)
+                     Output: u.user_id
+                     Index Cond: (u.user_id = eq.provider_id)
+                     Heap Fetches: 0
+                     Index Searches: 1
+                     Buffers: shared hit=3
+         ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=20) (actual time=0.008..0.008 rows=1.00 loops=1)
+               Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+               Index Cond: (pr.user_id = u.user_id)
+               Index Searches: 1
+               Buffers: shared hit=3
+ Planning:
+   Buffers: shared hit=446
+ Planning Time: 1.821 ms
+ Execution Time: 0.135 ms
+(46 rows)
+

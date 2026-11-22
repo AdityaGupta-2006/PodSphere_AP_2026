@@ -1,0 +1,59 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q14
+-- Section: Section 6: Equipment & Rentals
+-- Description: List rental requests received for provider's equipment
+-- Source File: dbms/04_queries.sql
+
+                                                                                      QUERY PLAN                                                                                       
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=62.25..62.28 rows=12 width=108) (actual time=0.283..0.285 rows=11.00 loops=1)
+   Output: r.rental_id, r.equipment_id, eq.equipment_name, r.renter_id, pr.display_name, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at
+   Sort Key: r.created_at DESC
+   Sort Method: quicksort  Memory: 26kB
+   Buffers: shared hit=81
+   ->  Nested Loop Left Join  (cost=9.17..62.04 rows=12 width=108) (actual time=0.062..0.250 rows=11.00 loops=1)
+         Output: r.rental_id, r.equipment_id, eq.equipment_name, r.renter_id, pr.display_name, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at
+         Inner Unique: true
+         Buffers: shared hit=78
+         ->  Nested Loop  (cost=8.89..56.89 rows=12 width=104) (actual time=0.051..0.129 rows=11.00 loops=1)
+               Output: r.rental_id, r.equipment_id, r.renter_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at, eq.equipment_name, u.user_id
+               Inner Unique: true
+               Buffers: shared hit=45
+               ->  Nested Loop  (cost=8.62..53.24 rows=12 width=96) (actual time=0.045..0.097 rows=11.00 loops=1)
+                     Output: r.rental_id, r.equipment_id, r.renter_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at, eq.equipment_name
+                     Buffers: shared hit=22
+                     ->  Bitmap Heap Scan on public.equipment eq  (cost=4.29..10.26 rows=2 width=41) (actual time=0.024..0.028 rows=2.00 loops=1)
+                           Output: eq.equipment_id, eq.provider_id, eq.category_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status
+                           Recheck Cond: (eq.provider_id = 401)
+                           Heap Blocks: exact=2
+                           Buffers: shared hit=7
+                           ->  Bitmap Index Scan on ix_equipment_provider_id  (cost=0.00..4.29 rows=2 width=0) (actual time=0.015..0.015 rows=2.00 loops=1)
+                                 Index Cond: (eq.provider_id = 401)
+                                 Index Searches: 1
+                                 Buffers: shared hit=5
+                     ->  Bitmap Heap Scan on public.rentals r  (cost=4.33..21.43 rows=6 width=63) (actual time=0.013..0.026 rows=5.50 loops=2)
+                           Output: r.rental_id, r.equipment_id, r.renter_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at
+                           Recheck Cond: (eq.equipment_id = r.equipment_id)
+                           Heap Blocks: exact=11
+                           Buffers: shared hit=15
+                           ->  Bitmap Index Scan on ix_rentals_equipment_id  (cost=0.00..4.33 rows=6 width=0) (actual time=0.006..0.006 rows=5.50 loops=2)
+                                 Index Cond: (r.equipment_id = eq.equipment_id)
+                                 Index Searches: 2
+                                 Buffers: shared hit=4
+               ->  Index Only Scan using pk_users on public.users u  (cost=0.28..0.30 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=11)
+                     Output: u.user_id
+                     Index Cond: (u.user_id = r.renter_id)
+                     Heap Fetches: 0
+                     Index Searches: 11
+                     Buffers: shared hit=23
+         ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=20) (actual time=0.010..0.010 rows=1.00 loops=11)
+               Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+               Index Cond: (pr.user_id = u.user_id)
+               Index Searches: 11
+               Buffers: shared hit=33
+ Planning:
+   Buffers: shared hit=452
+ Planning Time: 2.072 ms
+ Execution Time: 0.357 ms
+(49 rows)
+

@@ -1,0 +1,27 @@
+-- PodSphere CP4 Index Experiment (BEFORE Index Creation)
+-- Experiment: EXP3_rentals_renter_created_at
+-- Description: Composite index on rentals(renter_id, created_at DESC) for user rental history
+-- Status: Baseline without proposed index
+
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=10.99..10.99 rows=2 width=55) (actual time=0.017..0.017 rows=1.00 loops=1)
+   Output: rental_id, equipment_id, renter_id, start_date, end_date, agreed_rate, status, created_at
+   Sort Key: r.created_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=9
+   ->  Bitmap Heap Scan on public.rentals r  (cost=4.30..10.98 rows=2 width=55) (actual time=0.009..0.009 rows=1.00 loops=1)
+         Output: rental_id, equipment_id, renter_id, start_date, end_date, agreed_rate, status, created_at
+         Recheck Cond: (r.renter_id = 42)
+         Heap Blocks: exact=1
+         Buffers: shared hit=6
+         ->  Bitmap Index Scan on ix_rentals_renter_id  (cost=0.00..4.29 rows=2 width=0) (actual time=0.004..0.004 rows=1.00 loops=1)
+               Index Cond: (r.renter_id = 42)
+               Index Searches: 1
+               Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=175
+ Planning Time: 0.255 ms
+ Execution Time: 0.030 ms
+(18 rows)
+

@@ -1,0 +1,59 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q02
+-- Section: Section 1: Authentication
+-- Description: Fetch authenticated user account details with profile and assigned roles
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                     QUERY PLAN                                                                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=22.16..22.19 rows=1 width=295) (actual time=0.069..0.069 rows=1.00 loops=1)
+   Output: u.user_id, u.email, u.account_status, u.created_at, p.profile_id, p.display_name, p.bio, p.avatar_url, p.website_url, p.updated_at, COALESCE(array_agg(r.role_name) FILTER (WHERE (r.role_name IS NOT NULL)), '{}'::character varying[])
+   Group Key: u.email, p.profile_id
+   Buffers: shared hit=19
+   ->  Sort  (cost=22.16..22.16 rows=2 width=271) (actual time=0.062..0.062 rows=2.00 loops=1)
+         Output: u.email, p.profile_id, u.user_id, u.account_status, u.created_at, p.display_name, p.bio, p.avatar_url, p.website_url, p.updated_at, r.role_name
+         Sort Key: u.email, p.profile_id
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=19
+         ->  Nested Loop Left Join  (cost=0.84..22.15 rows=2 width=271) (actual time=0.048..0.050 rows=2.00 loops=1)
+               Output: u.email, p.profile_id, u.user_id, u.account_status, u.created_at, p.display_name, p.bio, p.avatar_url, p.website_url, p.updated_at, r.role_name
+               Inner Unique: true
+               Join Filter: (ur.role_id = r.role_id)
+               Rows Removed by Join Filter: 5
+               Buffers: shared hit=13
+               ->  Nested Loop Left Join  (cost=0.84..20.94 rows=2 width=271) (actual time=0.042..0.043 rows=2.00 loops=1)
+                     Output: u.user_id, u.email, u.account_status, u.created_at, p.profile_id, p.display_name, p.bio, p.avatar_url, p.website_url, p.updated_at, ur.role_id
+                     Buffers: shared hit=12
+                     ->  Nested Loop Left Join  (cost=0.56..16.60 rows=1 width=263) (actual time=0.015..0.016 rows=1.00 loops=1)
+                           Output: u.user_id, u.email, u.account_status, u.created_at, p.profile_id, p.display_name, p.bio, p.avatar_url, p.website_url, p.updated_at
+                           Inner Unique: true
+                           Buffers: shared hit=9
+                           ->  Index Scan using pk_users on public.users u  (cost=0.28..8.29 rows=1 width=43) (actual time=0.008..0.008 rows=1.00 loops=1)
+                                 Output: u.user_id, u.email, u.password_hash, u.created_at, u.account_status
+                                 Index Cond: (u.user_id = 42)
+                                 Index Searches: 1
+                                 Buffers: shared hit=6
+                           ->  Index Scan using uq_profiles_user_id on public.profiles p  (cost=0.28..8.29 rows=1 width=228) (actual time=0.004..0.004 rows=1.00 loops=1)
+                                 Output: p.profile_id, p.user_id, p.display_name, p.bio, p.avatar_url, p.website_url, p.updated_at
+                                 Index Cond: (p.user_id = 42)
+                                 Index Searches: 1
+                                 Buffers: shared hit=3
+                     ->  Index Only Scan using pk_user_roles on public.user_roles ur  (cost=0.28..4.31 rows=2 width=16) (actual time=0.026..0.026 rows=2.00 loops=1)
+                           Output: ur.user_id, ur.role_id
+                           Index Cond: (ur.user_id = 42)
+                           Heap Fetches: 0
+                           Index Searches: 1
+                           Buffers: shared hit=3
+               ->  Materialize  (cost=0.00..1.07 rows=5 width=16) (actual time=0.002..0.003 rows=3.50 loops=2)
+                     Output: r.role_name, r.role_id
+                     Storage: Memory  Maximum Storage: 17kB
+                     Buffers: shared hit=1
+                     ->  Seq Scan on public.roles r  (cost=0.00..1.05 rows=5 width=16) (actual time=0.002..0.002 rows=5.00 loops=1)
+                           Output: r.role_name, r.role_id
+                           Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=356
+ Planning Time: 0.620 ms
+ Execution Time: 0.110 ms
+(49 rows)
+

@@ -1,0 +1,26 @@
+-- PodSphere CP4 Index Experiment (BEFORE Index Creation)
+-- Experiment: EXP1_podcasts_status_created_at
+-- Description: Index on podcasts(status, created_at DESC) for podcast browsing feed
+-- Status: Baseline without proposed index
+
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=35.74..35.76 rows=10 width=82) (actual time=0.139..0.140 rows=10.00 loops=1)
+   Output: podcast_id, creator_id, title, category, language, status, created_at
+   Buffers: shared hit=20
+   ->  Sort  (cost=35.74..37.04 rows=520 width=82) (actual time=0.139..0.139 rows=10.00 loops=1)
+         Output: podcast_id, creator_id, title, category, language, status, created_at
+         Sort Key: p.created_at DESC
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=20
+         ->  Seq Scan on public.podcasts p  (cost=0.00..24.50 rows=520 width=82) (actual time=0.004..0.071 rows=520.00 loops=1)
+               Output: podcast_id, creator_id, title, category, language, status, created_at
+               Filter: ((p.status)::text = 'active'::text)
+               Rows Removed by Filter: 80
+               Buffers: shared hit=17
+ Planning:
+   Buffers: shared hit=116
+ Planning Time: 0.183 ms
+ Execution Time: 0.148 ms
+(17 rows)
+

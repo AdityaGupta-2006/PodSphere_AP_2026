@@ -1,0 +1,60 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q15
+-- Section: Section 7: Studio Bookings
+-- Description: Browse available studios with provider profile and review rating
+-- Source File: dbms/04_queries.sql
+
+                                                                                                      QUERY PLAN                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=7.91..10.37 rows=10 width=199) (actual time=0.196..0.275 rows=10.00 loops=1)
+   Output: s.studio_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status, pr.display_name, pr.avatar_url, (COALESCE(round(avg(r.rating), 2), '0'::numeric)), (count(DISTINCT r.review_id))
+   Buffers: shared hit=173
+   ->  GroupAggregate  (cost=7.91..705.26 rows=2833 width=199) (actual time=0.195..0.274 rows=10.00 loops=1)
+         Output: s.studio_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status, pr.display_name, pr.avatar_url, COALESCE(round(avg(r.rating), 2), '0'::numeric), count(DISTINCT r.review_id)
+         Group Key: s.studio_id, pr.display_name, pr.avatar_url
+         Buffers: shared hit=173
+         ->  Incremental Sort  (cost=7.91..627.35 rows=2833 width=169) (actual time=0.178..0.243 rows=61.00 loops=1)
+               Output: s.studio_id, pr.display_name, pr.avatar_url, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status, r.rating, r.review_id
+               Sort Key: s.studio_id DESC, pr.display_name, pr.avatar_url, r.review_id
+               Presorted Key: s.studio_id
+               Full-sort Groups: 2  Sort Method: quicksort  Average Memory: 31kB  Peak Memory: 31kB
+               Buffers: shared hit=173
+               ->  Nested Loop Left Join  (cost=0.97..518.58 rows=2833 width=169) (actual time=0.066..0.167 rows=73.00 loops=1)
+                     Output: s.studio_id, pr.display_name, pr.avatar_url, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status, r.rating, r.review_id
+                     Buffers: shared hit=167
+                     ->  Nested Loop Left Join  (cost=0.70..111.06 rows=85 width=159) (actual time=0.051..0.087 rows=13.00 loops=1)
+                           Output: s.studio_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status, pr.display_name, pr.avatar_url
+                           Inner Unique: true
+                           Buffers: shared hit=68
+                           ->  Nested Loop  (cost=0.42..74.60 rows=85 width=104) (actual time=0.014..0.032 rows=13.00 loops=1)
+                                 Output: s.studio_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status, u.user_id
+                                 Inner Unique: true
+                                 Buffers: shared hit=29
+                                 ->  Index Scan Backward using pk_studios on public.studios s  (cost=0.14..17.52 rows=85 width=104) (actual time=0.006..0.012 rows=13.00 loops=1)
+                                       Output: s.studio_id, s.provider_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status
+                                       Filter: ((s.capacity >= 4) AND (s.hourly_rate <= 150.00) AND ((s.status)::text = 'available'::text))
+                                       Rows Removed by Filter: 12
+                                       Index Searches: 1
+                                       Buffers: shared hit=2
+                                 ->  Index Only Scan using pk_users on public.users u  (cost=0.28..0.67 rows=1 width=8) (actual time=0.001..0.001 rows=1.00 loops=13)
+                                       Output: u.user_id
+                                       Index Cond: (u.user_id = s.provider_id)
+                                       Heap Fetches: 0
+                                       Index Searches: 13
+                                       Buffers: shared hit=27
+                           ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=71) (actual time=0.002..0.002 rows=1.00 loops=13)
+                                 Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                                 Index Cond: (pr.user_id = u.user_id)
+                                 Index Searches: 13
+                                 Buffers: shared hit=39
+                     ->  Index Scan using uq_reviews_studio_target_reviewer on public.reviews r  (cost=0.28..4.72 rows=7 width=18) (actual time=0.002..0.005 rows=5.62 loops=13)
+                           Output: r.review_id, r.reviewer_id, r.reviewed_user_id, r.equipment_id, r.studio_id, r.service_id, r.course_id, r.rating, r.review_text, r.created_at
+                           Index Cond: (r.studio_id = s.studio_id)
+                           Index Searches: 13
+                           Buffers: shared hit=99
+ Planning:
+   Buffers: shared hit=397
+ Planning Time: 2.024 ms
+ Execution Time: 0.384 ms
+(50 rows)
+

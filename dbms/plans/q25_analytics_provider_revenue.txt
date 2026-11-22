@@ -1,0 +1,108 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q25
+-- Section: Section 12: Analytics & Dashboards
+-- Description: Marketplace provider revenue summary across equipment rentals, studio bookings, and creator services
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                                                                                                                                                                                                                                           QUERY PLAN                                                                                                                                                                                                                                                                                                                                                                            
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop Left Join  (cost=18.04..134.75 rows=1 width=172) (actual time=0.250..0.253 rows=1.00 loops=1)
+   Output: u.user_id, pr.display_name, COALESCE((sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate))), '0'::numeric), COALESCE((count(r.rental_id)), '0'::bigint), COALESCE((sum(round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2))), '0'::numeric), COALESCE((count(sb.booking_id)), '0'::bigint), COALESCE((sum(so.agreed_price)), '0'::numeric), COALESCE((count(so.service_order_id)), '0'::bigint), ((COALESCE((sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate))), '0'::numeric) + COALESCE((sum(round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2))), '0'::numeric)) + COALESCE((sum(so.agreed_price)), '0'::numeric))
+   Buffers: shared hit=58
+   ->  Nested Loop Left Join  (cost=13.55..97.90 rows=1 width=100) (actual time=0.214..0.216 rows=1.00 loops=1)
+         Output: u.user_id, pr.display_name, (sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate))), (count(r.rental_id)), (sum(round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2))), (count(sb.booking_id))
+         Buffers: shared hit=47
+         ->  Nested Loop Left Join  (cost=9.17..66.03 rows=1 width=60) (actual time=0.125..0.127 rows=1.00 loops=1)
+               Output: u.user_id, pr.display_name, (sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate))), (count(r.rental_id))
+               Buffers: shared hit=28
+               ->  Nested Loop Left Join  (cost=0.56..12.60 rows=1 width=20) (actual time=0.068..0.069 rows=1.00 loops=1)
+                     Output: u.user_id, pr.display_name
+                     Inner Unique: true
+                     Buffers: shared hit=9
+                     ->  Index Only Scan using pk_users on public.users u  (cost=0.28..4.29 rows=1 width=8) (actual time=0.058..0.059 rows=1.00 loops=1)
+                           Output: u.user_id
+                           Index Cond: (u.user_id = 401)
+                           Heap Fetches: 0
+                           Index Searches: 1
+                           Buffers: shared hit=6
+                     ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..8.29 rows=1 width=20) (actual time=0.008..0.008 rows=1.00 loops=1)
+                           Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                           Index Cond: (pr.user_id = 401)
+                           Index Searches: 1
+                           Buffers: shared hit=3
+               ->  GroupAggregate  (cost=8.62..53.41 rows=1 width=48) (actual time=0.056..0.057 rows=0.00 loops=1)
+                     Output: eq.provider_id, sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate)), count(r.rental_id)
+                     Buffers: shared hit=19
+                     ->  Nested Loop  (cost=8.62..53.26 rows=9 width=33) (actual time=0.056..0.056 rows=0.00 loops=1)
+                           Output: eq.provider_id, r.end_date, r.start_date, r.quantity, r.agreed_rate, r.rental_id
+                           Buffers: shared hit=19
+                           ->  Bitmap Heap Scan on public.equipment eq  (cost=4.29..10.26 rows=2 width=16) (actual time=0.011..0.013 rows=2.00 loops=1)
+                                 Output: eq.equipment_id, eq.provider_id, eq.category_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status
+                                 Recheck Cond: (eq.provider_id = 401)
+                                 Heap Blocks: exact=2
+                                 Buffers: shared hit=4
+                                 ->  Bitmap Index Scan on ix_equipment_provider_id  (cost=0.00..4.29 rows=2 width=0) (actual time=0.007..0.007 rows=2.00 loops=1)
+                                       Index Cond: (eq.provider_id = 401)
+                                       Index Searches: 1
+                                       Buffers: shared hit=2
+                           ->  Bitmap Heap Scan on public.rentals r  (cost=4.33..21.45 rows=5 width=33) (actual time=0.020..0.020 rows=0.00 loops=2)
+                                 Output: r.rental_id, r.equipment_id, r.renter_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at
+                                 Recheck Cond: (eq.equipment_id = r.equipment_id)
+                                 Filter: ((r.status)::text = ANY ('{confirmed,active,completed}'::text[]))
+                                 Rows Removed by Filter: 6
+                                 Heap Blocks: exact=11
+                                 Buffers: shared hit=15
+                                 ->  Bitmap Index Scan on ix_rentals_equipment_id  (cost=0.00..4.33 rows=6 width=0) (actual time=0.004..0.004 rows=5.50 loops=2)
+                                       Index Cond: (r.equipment_id = eq.equipment_id)
+                                       Index Searches: 2
+                                       Buffers: shared hit=4
+         ->  GroupAggregate  (cost=4.38..31.85 rows=1 width=48) (actual time=0.088..0.088 rows=1.00 loops=1)
+               Output: s.provider_id, sum(round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2)), count(sb.booking_id)
+               Buffers: shared hit=19
+               ->  Nested Loop  (cost=4.38..31.66 rows=10 width=37) (actual time=0.026..0.064 rows=10.00 loops=1)
+                     Output: s.provider_id, sb.end_time, sb.start_time, sb.agreed_rate, sb.booking_id
+                     Buffers: shared hit=19
+                     ->  Seq Scan on public.studios s  (cost=0.00..4.88 rows=1 width=16) (actual time=0.013..0.026 rows=1.00 loops=1)
+                           Output: s.studio_id, s.provider_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status
+                           Filter: (s.provider_id = 401)
+                           Rows Removed by Filter: 149
+                           Buffers: shared hit=3
+                     ->  Bitmap Heap Scan on public.studio_bookings sb  (cost=4.38..26.68 rows=10 width=37) (actual time=0.012..0.036 rows=10.00 loops=1)
+                           Output: sb.booking_id, sb.studio_id, sb.customer_id, sb.start_time, sb.end_time, sb.agreed_rate, sb.currency, sb.status, sb.created_at
+                           Recheck Cond: (s.studio_id = sb.studio_id)
+                           Filter: ((sb.status)::text = ANY ('{confirmed,completed}'::text[]))
+                           Rows Removed by Filter: 4
+                           Heap Blocks: exact=14
+                           Buffers: shared hit=16
+                           ->  Bitmap Index Scan on ix_studio_bookings_studio_id  (cost=0.00..4.38 rows=13 width=0) (actual time=0.005..0.005 rows=14.00 loops=1)
+                                 Index Cond: (sb.studio_id = s.studio_id)
+                                 Index Searches: 1
+                                 Buffers: shared hit=2
+   ->  GroupAggregate  (cost=4.49..36.83 rows=1 width=48) (actual time=0.032..0.033 rows=1.00 loops=1)
+         Output: srv.provider_id, sum(so.agreed_price), count(so.service_order_id)
+         Buffers: shared hit=11
+         ->  Nested Loop  (cost=4.49..36.80 rows=5 width=21) (actual time=0.018..0.030 rows=4.00 loops=1)
+               Output: srv.provider_id, so.agreed_price, so.service_order_id
+               Buffers: shared hit=11
+               ->  Index Scan using ix_services_provider_id on public.services srv  (cost=0.15..8.17 rows=1 width=16) (actual time=0.006..0.006 rows=1.00 loops=1)
+                     Output: srv.service_id, srv.provider_id, srv.service_name, srv.description, srv.price, srv.currency, srv.status
+                     Index Cond: (srv.provider_id = 401)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+               ->  Bitmap Heap Scan on public.service_orders so  (cost=4.34..28.58 rows=5 width=21) (actual time=0.012..0.023 rows=4.00 loops=1)
+                     Output: so.service_order_id, so.service_id, so.customer_id, so.agreed_price, so.currency, so.requirements, so.scheduled_at, so.status, so.created_at, so.completed_at
+                     Recheck Cond: (srv.service_id = so.service_id)
+                     Filter: ((so.status)::text = ANY ('{accepted,in_progress,completed}'::text[]))
+                     Rows Removed by Filter: 3
+                     Heap Blocks: exact=7
+                     Buffers: shared hit=9
+                     ->  Bitmap Index Scan on ix_service_orders_service_id  (cost=0.00..4.34 rows=8 width=0) (actual time=0.004..0.004 rows=7.00 loops=1)
+                           Index Cond: (so.service_id = srv.service_id)
+                           Index Searches: 1
+                           Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=685
+ Planning Time: 3.616 ms
+ Execution Time: 0.373 ms
+(98 rows)
+

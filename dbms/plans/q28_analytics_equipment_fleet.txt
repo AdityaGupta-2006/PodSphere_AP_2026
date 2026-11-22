@@ -1,0 +1,61 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q28
+-- Section: Section 12: Analytics & Dashboards
+-- Description: Equipment fleet utilization and rental activity report
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                                                                                                                                                             QUERY PLAN                                                                                                                                                                                                                                                                                              
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=55.56..55.59 rows=12 width=139) (actual time=0.129..0.130 rows=2.00 loops=1)
+   Output: eq.equipment_id, eq.equipment_name, ec.category_name, eq.quantity, eq.daily_rate, eq.currency, eq.equipment_status, (count(r.rental_id)), (count(r.rental_id) FILTER (WHERE ((r.status)::text = ANY ('{confirmed,active}'::text[])))), (COALESCE(sum(((r.end_date - r.start_date) * r.quantity)) FILTER (WHERE ((r.status)::text = ANY ('{confirmed,active,completed}'::text[]))), '0'::bigint)), (COALESCE(sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate)) FILTER (WHERE ((r.status)::text = ANY ('{confirmed,active,completed}'::text[]))), '0'::numeric))
+   Sort Key: (COALESCE(sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate)) FILTER (WHERE ((r.status)::text = ANY ('{confirmed,active,completed}'::text[]))), '0'::numeric)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=32
+   ->  GroupAggregate  (cost=54.68..55.34 rows=12 width=139) (actual time=0.110..0.115 rows=2.00 loops=1)
+         Output: eq.equipment_id, eq.equipment_name, ec.category_name, eq.quantity, eq.daily_rate, eq.currency, eq.equipment_status, count(r.rental_id), count(r.rental_id) FILTER (WHERE ((r.status)::text = ANY ('{confirmed,active}'::text[]))), COALESCE(sum(((r.end_date - r.start_date) * r.quantity)) FILTER (WHERE ((r.status)::text = ANY ('{confirmed,active,completed}'::text[]))), '0'::bigint), COALESCE(sum(((((r.end_date - r.start_date) * r.quantity))::numeric * r.agreed_rate)) FILTER (WHERE ((r.status)::text = ANY ('{confirmed,active,completed}'::text[]))), '0'::numeric)
+         Group Key: eq.equipment_id, ec.category_name
+         Buffers: shared hit=29
+         ->  Sort  (cost=54.68..54.71 rows=12 width=118) (actual time=0.097..0.098 rows=11.00 loops=1)
+               Output: eq.equipment_id, ec.category_name, eq.equipment_name, eq.quantity, eq.daily_rate, eq.currency, eq.equipment_status, r.rental_id, r.status, r.end_date, r.start_date, r.quantity, r.agreed_rate
+               Sort Key: eq.equipment_id, ec.category_name
+               Sort Method: quicksort  Memory: 26kB
+               Buffers: shared hit=29
+               ->  Nested Loop Left Join  (cost=9.84..54.47 rows=12 width=118) (actual time=0.047..0.077 rows=11.00 loops=1)
+                     Output: eq.equipment_id, ec.category_name, eq.equipment_name, eq.quantity, eq.daily_rate, eq.currency, eq.equipment_status, r.rental_id, r.status, r.end_date, r.start_date, r.quantity, r.agreed_rate
+                     Buffers: shared hit=23
+                     ->  Hash Join  (cost=5.52..11.49 rows=2 width=83) (actual time=0.037..0.040 rows=2.00 loops=1)
+                           Output: eq.equipment_id, eq.equipment_name, eq.quantity, eq.daily_rate, eq.currency, eq.equipment_status, ec.category_name
+                           Inner Unique: true
+                           Hash Cond: (eq.category_id = ec.category_id)
+                           Buffers: shared hit=8
+                           ->  Bitmap Heap Scan on public.equipment eq  (cost=4.29..10.26 rows=2 width=72) (actual time=0.012..0.014 rows=2.00 loops=1)
+                                 Output: eq.equipment_id, eq.provider_id, eq.category_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status
+                                 Recheck Cond: (eq.provider_id = 401)
+                                 Heap Blocks: exact=2
+                                 Buffers: shared hit=7
+                                 ->  Bitmap Index Scan on ix_equipment_provider_id  (cost=0.00..4.29 rows=2 width=0) (actual time=0.009..0.009 rows=2.00 loops=1)
+                                       Index Cond: (eq.provider_id = 401)
+                                       Index Searches: 1
+                                       Buffers: shared hit=5
+                           ->  Hash  (cost=1.10..1.10 rows=10 width=27) (actual time=0.019..0.019 rows=10.00 loops=1)
+                                 Output: ec.category_name, ec.category_id
+                                 Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                 Buffers: shared hit=1
+                                 ->  Seq Scan on public.equipment_categories ec  (cost=0.00..1.10 rows=10 width=27) (actual time=0.013..0.014 rows=10.00 loops=1)
+                                       Output: ec.category_name, ec.category_id
+                                       Buffers: shared hit=1
+                     ->  Bitmap Heap Scan on public.rentals r  (cost=4.33..21.43 rows=6 width=43) (actual time=0.007..0.016 rows=5.50 loops=2)
+                           Output: r.rental_id, r.equipment_id, r.renter_id, r.start_date, r.end_date, r.quantity, r.agreed_rate, r.currency, r.status, r.created_at
+                           Recheck Cond: (eq.equipment_id = r.equipment_id)
+                           Heap Blocks: exact=11
+                           Buffers: shared hit=15
+                           ->  Bitmap Index Scan on ix_rentals_equipment_id  (cost=0.00..4.33 rows=6 width=0) (actual time=0.004..0.004 rows=5.50 loops=2)
+                                 Index Cond: (r.equipment_id = eq.equipment_id)
+                                 Index Searches: 2
+                                 Buffers: shared hit=4
+ Planning:
+   Buffers: shared hit=344
+ Planning Time: 1.224 ms
+ Execution Time: 0.185 ms
+(51 rows)
+

@@ -1,0 +1,60 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q18
+-- Section: Section 8: Creator Services
+-- Description: Browse active creator services with provider details and reviews
+-- Source File: dbms/04_queries.sql
+
+                                                                                                      QUERY PLAN                                                                                                      
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=6.71..11.67 rows=10 width=256) (actual time=0.188..0.202 rows=10.00 loops=1)
+   Output: srv.service_id, srv.service_name, srv.description, srv.price, srv.currency, srv.status, pr.display_name, pr.avatar_url, (COALESCE(round(avg(r.rating), 2), '0'::numeric)), (count(DISTINCT r.review_id))
+   Buffers: shared hit=163
+   ->  GroupAggregate  (cost=6.71..601.56 rows=1200 width=256) (actual time=0.187..0.200 rows=10.00 loops=1)
+         Output: srv.service_id, srv.service_name, srv.description, srv.price, srv.currency, srv.status, pr.display_name, pr.avatar_url, COALESCE(round(avg(r.rating), 2), '0'::numeric), count(DISTINCT r.review_id)
+         Group Key: srv.service_id, pr.display_name, pr.avatar_url
+         Buffers: shared hit=163
+         ->  Incremental Sort  (cost=6.71..568.56 rows=1200 width=226) (actual time=0.172..0.173 rows=21.00 loops=1)
+               Output: srv.service_id, pr.display_name, pr.avatar_url, srv.service_name, srv.description, srv.price, srv.currency, srv.status, r.rating, r.review_id
+               Sort Key: srv.service_id DESC, pr.display_name, pr.avatar_url, r.review_id
+               Presorted Key: srv.service_id
+               Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 32kB  Peak Memory: 32kB
+               Buffers: shared hit=163
+               ->  Nested Loop Left Join  (cost=0.98..529.77 rows=1200 width=226) (actual time=0.040..0.129 rows=33.00 loops=1)
+                     Output: srv.service_id, pr.display_name, pr.avatar_url, srv.service_name, srv.description, srv.price, srv.currency, srv.status, r.rating, r.review_id
+                     Buffers: shared hit=157
+                     ->  Nested Loop Left Join  (cost=0.70..130.65 rows=96 width=216) (actual time=0.030..0.086 rows=17.00 loops=1)
+                           Output: srv.service_id, srv.service_name, srv.description, srv.price, srv.currency, srv.status, pr.display_name, pr.avatar_url
+                           Inner Unique: true
+                           Buffers: shared hit=90
+                           ->  Nested Loop  (cost=0.43..89.47 rows=96 width=161) (actual time=0.021..0.053 rows=17.00 loops=1)
+                                 Output: srv.service_id, srv.service_name, srv.description, srv.price, srv.currency, srv.status, u.user_id
+                                 Inner Unique: true
+                                 Buffers: shared hit=39
+                                 ->  Index Scan Backward using pk_services on public.services srv  (cost=0.15..29.15 rows=96 width=161) (actual time=0.010..0.024 rows=17.00 loops=1)
+                                       Output: srv.service_id, srv.provider_id, srv.service_name, srv.description, srv.price, srv.currency, srv.status
+                                       Filter: ((srv.price <= 100.00) AND ((srv.status)::text = 'active'::text))
+                                       Rows Removed by Filter: 53
+                                       Index Searches: 1
+                                       Buffers: shared hit=4
+                                 ->  Index Only Scan using pk_users on public.users u  (cost=0.28..0.63 rows=1 width=8) (actual time=0.001..0.001 rows=1.00 loops=17)
+                                       Output: u.user_id
+                                       Index Cond: (u.user_id = srv.provider_id)
+                                       Heap Fetches: 0
+                                       Index Searches: 17
+                                       Buffers: shared hit=35
+                           ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=71) (actual time=0.002..0.002 rows=1.00 loops=17)
+                                 Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                                 Index Cond: (pr.user_id = u.user_id)
+                                 Index Searches: 17
+                                 Buffers: shared hit=51
+                     ->  Index Scan using uq_reviews_service_target_reviewer on public.reviews r  (cost=0.28..4.14 rows=2 width=18) (actual time=0.001..0.002 rows=1.94 loops=17)
+                           Output: r.review_id, r.reviewer_id, r.reviewed_user_id, r.equipment_id, r.studio_id, r.service_id, r.course_id, r.rating, r.review_text, r.created_at
+                           Index Cond: (r.service_id = srv.service_id)
+                           Index Searches: 17
+                           Buffers: shared hit=67
+ Planning:
+   Buffers: shared hit=390
+ Planning Time: 2.258 ms
+ Execution Time: 0.271 ms
+(50 rows)
+

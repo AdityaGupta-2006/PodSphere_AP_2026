@@ -1,0 +1,21 @@
+-- PodSphere CP4 Index Experiment (AFTER Index Creation)
+-- Experiment: EXP1_podcasts_status_created_at
+-- Description: Index on podcasts(status, created_at DESC) for podcast browsing feed
+-- Applied DDL: CREATE INDEX idx_podcasts_status_created_at ON podcasts (status, created_at DESC);
+
+                                                                           QUERY PLAN                                                                           
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.28..1.83 rows=10 width=82) (actual time=0.010..0.011 rows=10.00 loops=1)
+   Output: podcast_id, creator_id, title, category, language, status, created_at
+   Buffers: shared hit=4
+   ->  Index Scan using idx_podcasts_status_created_at on public.podcasts p  (cost=0.28..81.11 rows=520 width=82) (actual time=0.009..0.010 rows=10.00 loops=1)
+         Output: podcast_id, creator_id, title, category, language, status, created_at
+         Index Cond: ((p.status)::text = 'active'::text)
+         Index Searches: 1
+         Buffers: shared hit=4
+ Planning:
+   Buffers: shared hit=149
+ Planning Time: 0.213 ms
+ Execution Time: 0.019 ms
+(12 rows)
+

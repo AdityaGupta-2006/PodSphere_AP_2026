@@ -1,0 +1,91 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q08
+-- Section: Section 5: Courses & Learning
+-- Description: Fetch course details by ID with instructor profile and active enrollment count
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                                     QUERY PLAN                                                                                                                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=96.06..108.06 rows=320 width=424) (actual time=0.644..0.645 rows=1.00 loops=1)
+   Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at, pr.display_name, pr.bio, pr.avatar_url, count(DISTINCT l.lesson_id), count(DISTINCT e.enrollment_id) FILTER (WHERE ((e.status)::text = 'active'::text)), COALESCE(round(avg(r.rating), 2), '0'::numeric), count(DISTINCT r.review_id)
+   Group Key: pr.display_name, pr.bio, pr.avatar_url
+   Buffers: shared hit=45
+   ->  Sort  (cost=96.06..96.86 rows=320 width=402) (actual time=0.515..0.527 rows=320.00 loops=1)
+         Output: pr.display_name, pr.bio, pr.avatar_url, c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at, l.lesson_id, e.enrollment_id, e.status, r.rating, r.review_id
+         Sort Key: pr.display_name, pr.bio, pr.avatar_url, l.lesson_id
+         Sort Method: quicksort  Memory: 160kB
+         Buffers: shared hit=45
+         ->  Nested Loop Left Join  (cost=13.70..82.74 rows=320 width=402) (actual time=0.056..0.135 rows=320.00 loops=1)
+               Output: pr.display_name, pr.bio, pr.avatar_url, c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at, l.lesson_id, e.enrollment_id, e.status, r.rating, r.review_id
+               Buffers: shared hit=39
+               ->  Nested Loop Left Join  (cost=9.35..50.45 rows=32 width=394) (actual time=0.043..0.066 rows=32.00 loops=1)
+                     Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at, pr.display_name, pr.bio, pr.avatar_url, e.enrollment_id, e.status, r.rating, r.review_id
+                     Buffers: shared hit=27
+                     ->  Nested Loop Left Join  (cost=5.01..30.68 rows=4 width=378) (actual time=0.028..0.035 rows=4.00 loops=1)
+                           Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at, pr.display_name, pr.bio, pr.avatar_url, r.rating, r.review_id
+                           Buffers: shared hit=17
+                           ->  Nested Loop Left Join  (cost=0.70..12.89 rows=1 width=368) (actual time=0.019..0.020 rows=1.00 loops=1)
+                                 Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at, pr.display_name, pr.bio, pr.avatar_url
+                                 Inner Unique: true
+                                 Buffers: shared hit=11
+                                 ->  Nested Loop  (cost=0.42..12.46 rows=1 width=207) (actual time=0.013..0.013 rows=1.00 loops=1)
+                                       Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at, u.user_id
+                                       Inner Unique: true
+                                       Buffers: shared hit=8
+                                       ->  Index Scan using pk_courses on public.courses c  (cost=0.14..8.16 rows=1 width=199) (actual time=0.009..0.009 rows=1.00 loops=1)
+                                             Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at
+                                             Index Cond: (c.course_id = 5)
+                                             Index Searches: 1
+                                             Buffers: shared hit=5
+                                       ->  Index Only Scan using pk_users on public.users u  (cost=0.28..4.29 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=1)
+                                             Output: u.user_id
+                                             Index Cond: (u.user_id = c.instructor_id)
+                                             Heap Fetches: 0
+                                             Index Searches: 1
+                                             Buffers: shared hit=3
+                                 ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=177) (actual time=0.005..0.005 rows=1.00 loops=1)
+                                       Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                                       Index Cond: (pr.user_id = u.user_id)
+                                       Index Searches: 1
+                                       Buffers: shared hit=3
+                           ->  Bitmap Heap Scan on public.reviews r  (cost=4.31..17.75 rows=4 width=18) (actual time=0.008..0.013 rows=4.00 loops=1)
+                                 Output: r.review_id, r.reviewer_id, r.reviewed_user_id, r.equipment_id, r.studio_id, r.service_id, r.course_id, r.rating, r.review_text, r.created_at
+                                 Recheck Cond: (r.course_id = 5)
+                                 Heap Blocks: exact=4
+                                 Buffers: shared hit=6
+                                 ->  Bitmap Index Scan on uq_reviews_course_target_reviewer  (cost=0.00..4.31 rows=4 width=0) (actual time=0.003..0.003 rows=4.00 loops=1)
+                                       Index Cond: (r.course_id = 5)
+                                       Index Searches: 1
+                                       Buffers: shared hit=2
+                     ->  Materialize  (cost=4.34..19.38 rows=8 width=24) (actual time=0.004..0.007 rows=8.00 loops=4)
+                           Output: e.enrollment_id, e.status, e.course_id
+                           Storage: Memory  Maximum Storage: 17kB
+                           Buffers: shared hit=10
+                           ->  Bitmap Heap Scan on public.enrollments e  (cost=4.34..19.34 rows=8 width=24) (actual time=0.010..0.021 rows=8.00 loops=1)
+                                 Output: e.enrollment_id, e.status, e.course_id
+                                 Recheck Cond: (e.course_id = 5)
+                                 Heap Blocks: exact=8
+                                 Buffers: shared hit=10
+                                 ->  Bitmap Index Scan on ix_enrollments_course_id  (cost=0.00..4.34 rows=8 width=0) (actual time=0.006..0.006 rows=8.00 loops=1)
+                                       Index Cond: (e.course_id = 5)
+                                       Index Searches: 1
+                                       Buffers: shared hit=2
+               ->  Materialize  (cost=4.36..28.32 rows=10 width=16) (actual time=0.000..0.001 rows=10.00 loops=32)
+                     Output: l.lesson_id, l.course_id
+                     Storage: Memory  Maximum Storage: 17kB
+                     Buffers: shared hit=12
+                     ->  Bitmap Heap Scan on public.lessons l  (cost=4.36..28.27 rows=10 width=16) (actual time=0.011..0.025 rows=10.00 loops=1)
+                           Output: l.lesson_id, l.course_id
+                           Recheck Cond: (l.course_id = 5)
+                           Heap Blocks: exact=10
+                           Buffers: shared hit=12
+                           ->  Bitmap Index Scan on uq_lessons_course_order  (cost=0.00..4.36 rows=10 width=0) (actual time=0.007..0.007 rows=10.00 loops=1)
+                                 Index Cond: (l.course_id = 5)
+                                 Index Searches: 1
+                                 Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=564
+ Planning Time: 1.565 ms
+ Execution Time: 0.710 ms
+(81 rows)
+

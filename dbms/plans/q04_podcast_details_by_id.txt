@@ -1,0 +1,59 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q04
+-- Section: Section 4: Podcasts & Episodes
+-- Description: Fetch podcast details by ID with creator profile and episode counts
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                  QUERY PLAN                                                                                                                  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=51.18..51.43 rows=10 width=263) (actual time=0.065..0.066 rows=1.00 loops=1)
+   Output: p.podcast_id, p.creator_id, p.title, p.description, p.category, p.language, p.status, p.created_at, pr.display_name, pr.avatar_url, count(e.episode_id), count(e.episode_id) FILTER (WHERE ((e.status)::text = 'published'::text))
+   Group Key: pr.display_name, pr.avatar_url
+   Buffers: shared hit=27
+   ->  Sort  (cost=51.18..51.20 rows=10 width=264) (actual time=0.058..0.059 rows=10.00 loops=1)
+         Output: pr.display_name, pr.avatar_url, p.podcast_id, p.creator_id, p.title, p.description, p.category, p.language, p.status, p.created_at, e.episode_id, e.status
+         Sort Key: pr.display_name, pr.avatar_url
+         Sort Method: quicksort  Memory: 27kB
+         Buffers: shared hit=27
+         ->  Nested Loop Left Join  (cost=5.19..51.01 rows=10 width=264) (actual time=0.027..0.042 rows=10.00 loops=1)
+               Output: pr.display_name, pr.avatar_url, p.podcast_id, p.creator_id, p.title, p.description, p.category, p.language, p.status, p.created_at, e.episode_id, e.status
+               Buffers: shared hit=24
+               ->  Nested Loop Left Join  (cost=0.83..13.02 rows=1 width=247) (actual time=0.017..0.018 rows=1.00 loops=1)
+                     Output: p.podcast_id, p.creator_id, p.title, p.description, p.category, p.language, p.status, p.created_at, pr.display_name, pr.avatar_url
+                     Inner Unique: true
+                     Buffers: shared hit=12
+                     ->  Nested Loop  (cost=0.55..12.59 rows=1 width=192) (actual time=0.013..0.014 rows=1.00 loops=1)
+                           Output: p.podcast_id, p.creator_id, p.title, p.description, p.category, p.language, p.status, p.created_at, u.user_id
+                           Inner Unique: true
+                           Buffers: shared hit=9
+                           ->  Index Scan using pk_podcasts on public.podcasts p  (cost=0.28..8.29 rows=1 width=184) (actual time=0.008..0.008 rows=1.00 loops=1)
+                                 Output: p.podcast_id, p.creator_id, p.title, p.description, p.category, p.language, p.status, p.created_at
+                                 Index Cond: (p.podcast_id = 12)
+                                 Index Searches: 1
+                                 Buffers: shared hit=6
+                           ->  Index Only Scan using pk_users on public.users u  (cost=0.28..4.29 rows=1 width=8) (actual time=0.001..0.001 rows=1.00 loops=1)
+                                 Output: u.user_id
+                                 Index Cond: (u.user_id = p.creator_id)
+                                 Heap Fetches: 0
+                                 Index Searches: 1
+                                 Buffers: shared hit=3
+                     ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=71) (actual time=0.003..0.003 rows=1.00 loops=1)
+                           Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                           Index Cond: (pr.user_id = u.user_id)
+                           Index Searches: 1
+                           Buffers: shared hit=3
+               ->  Bitmap Heap Scan on public.episodes e  (cost=4.36..37.89 rows=10 width=25) (actual time=0.008..0.021 rows=10.00 loops=1)
+                     Output: e.episode_id, e.podcast_id, e.episode_number, e.title, e.description, e.media_url, e.duration_seconds, e.status, e.published_at
+                     Recheck Cond: (e.podcast_id = 12)
+                     Heap Blocks: exact=10
+                     Buffers: shared hit=12
+                     ->  Bitmap Index Scan on uq_episodes_podcast_number  (cost=0.00..4.36 rows=10 width=0) (actual time=0.004..0.004 rows=10.00 loops=1)
+                           Index Cond: (e.podcast_id = 12)
+                           Index Searches: 1
+                           Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=373
+ Planning Time: 0.598 ms
+ Execution Time: 0.113 ms
+(49 rows)
+
