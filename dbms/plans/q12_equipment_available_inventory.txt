@@ -1,0 +1,61 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q12
+-- Section: Section 6: Equipment & Rentals
+-- Description: Calculate available inventory for an equipment listing across an overlapping date range
+-- Source File: dbms/04_queries.sql
+
+                                                                                           QUERY PLAN                                                                                           
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=4.58..20.71 rows=1 width=20) (actual time=0.055..0.056 rows=1.00 loops=1)
+   Output: eq.equipment_id, eq.quantity, (eq.quantity - COALESCE(max((sum(existing.quantity))), '0'::bigint))
+   Buffers: shared hit=13
+   ->  Nested Loop Left Join  (cost=4.58..20.70 rows=1 width=20) (actual time=0.050..0.052 rows=1.00 loops=1)
+         Output: eq.equipment_id, eq.quantity, (sum(existing.quantity))
+         Buffers: shared hit=13
+         ->  Index Scan using pk_equipment on public.equipment eq  (cost=0.28..8.29 rows=1 width=12) (actual time=0.015..0.015 rows=1.00 loops=1)
+               Output: eq.equipment_id, eq.provider_id, eq.category_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status
+               Index Cond: (eq.equipment_id = 15)
+               Index Searches: 1
+               Buffers: shared hit=6
+         ->  GroupAggregate  (cost=4.31..12.39 rows=1 width=12) (actual time=0.034..0.034 rows=0.00 loops=1)
+               Output: ('2024-06-01'::date), sum(existing.quantity)
+               Group Key: ('2024-06-01'::date)
+               Buffers: shared hit=7
+               ->  Nested Loop  (cost=4.31..12.37 rows=1 width=8) (actual time=0.033..0.034 rows=0.00 loops=1)
+                     Output: ('2024-06-01'::date), existing.quantity
+                     Join Filter: ((existing.start_date <= ('2024-06-01'::date)) AND (existing.end_date > ('2024-06-01'::date)))
+                     Buffers: shared hit=7
+                     ->  Unique  (cost=4.18..4.19 rows=2 width=4) (actual time=0.023..0.024 rows=1.00 loops=1)
+                           Output: ('2024-06-01'::date)
+                           Buffers: shared hit=5
+                           ->  Sort  (cost=4.18..4.19 rows=2 width=4) (actual time=0.022..0.023 rows=1.00 loops=1)
+                                 Output: ('2024-06-01'::date)
+                                 Sort Key: ('2024-06-01'::date)
+                                 Sort Method: quicksort  Memory: 25kB
+                                 Buffers: shared hit=5
+                                 ->  Append  (cost=0.00..4.17 rows=2 width=4) (actual time=0.001..0.007 rows=1.00 loops=1)
+                                       Buffers: shared hit=2
+                                       ->  Result  (cost=0.00..0.01 rows=1 width=4) (actual time=0.000..0.000 rows=1.00 loops=1)
+                                             Output: '2024-06-01'::date
+                                       ->  Index Only Scan using ix_rentals_inventory_window on public.rentals r  (cost=0.12..4.15 rows=1 width=4) (actual time=0.004..0.004 rows=0.00 loops=1)
+                                             Output: r.start_date
+                                             Index Cond: ((r.equipment_id = eq.equipment_id) AND (r.start_date >= '2024-06-01'::date) AND (r.start_date < '2024-06-15'::date))
+                                             Filter: (daterange(r.start_date, r.end_date, '[)'::text) && '[2024-06-01,2024-06-15)'::daterange)
+                                             Heap Fetches: 0
+                                             Index Searches: 1
+                                             Buffers: shared hit=2
+                     ->  Materialize  (cost=0.12..8.15 rows=1 width=12) (actual time=0.010..0.010 rows=0.00 loops=1)
+                           Output: existing.quantity, existing.start_date, existing.end_date
+                           Storage: Memory  Maximum Storage: 17kB
+                           Buffers: shared hit=2
+                           ->  Index Scan using ix_rentals_inventory_window on public.rentals existing  (cost=0.12..8.14 rows=1 width=12) (actual time=0.005..0.005 rows=0.00 loops=1)
+                                 Output: existing.quantity, existing.start_date, existing.end_date
+                                 Index Cond: (existing.equipment_id = eq.equipment_id)
+                                 Index Searches: 1
+                                 Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=301
+ Planning Time: 1.402 ms
+ Execution Time: 0.134 ms
+(51 rows)
+

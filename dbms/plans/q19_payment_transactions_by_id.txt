@@ -1,0 +1,54 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q19
+-- Section: Section 9: Finance Operations
+-- Description: Fetch payment by ID with payer information and associated transaction events
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                      QUERY PLAN                                                                                                                                      
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=28.52..28.53 rows=2 width=164) (actual time=0.078..0.079 rows=2.00 loops=1)
+   Output: p.payment_id, p.payer_id, u.email, pr.display_name, p.amount, p.currency, p.payment_method, p.payment_status, p.payment_reference, p.created_at, p.paid_at, t.transaction_id, t.transaction_type, t.amount, t.transaction_status, t.provider_reference, t.created_at
+   Sort Key: t.created_at
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=19
+   ->  Nested Loop Left Join  (cost=5.14..28.51 rows=2 width=164) (actual time=0.053..0.060 rows=2.00 loops=1)
+         Output: p.payment_id, p.payer_id, u.email, pr.display_name, p.amount, p.currency, p.payment_method, p.payment_status, p.payment_reference, p.created_at, p.paid_at, t.transaction_id, t.transaction_type, t.amount, t.transaction_status, t.provider_reference, t.created_at
+         Buffers: shared hit=16
+         ->  Nested Loop Left Join  (cost=0.84..17.03 rows=1 width=105) (actual time=0.036..0.037 rows=1.00 loops=1)
+               Output: p.payment_id, p.payer_id, p.amount, p.currency, p.payment_method, p.payment_status, p.payment_reference, p.created_at, p.paid_at, u.email, pr.display_name
+               Inner Unique: true
+               Buffers: shared hit=12
+               ->  Nested Loop  (cost=0.56..16.60 rows=1 width=101) (actual time=0.024..0.025 rows=1.00 loops=1)
+                     Output: p.payment_id, p.payer_id, p.amount, p.currency, p.payment_method, p.payment_status, p.payment_reference, p.created_at, p.paid_at, u.email, u.user_id
+                     Inner Unique: true
+                     Buffers: shared hit=9
+                     ->  Index Scan using pk_payments on public.payments p  (cost=0.28..8.30 rows=1 width=73) (actual time=0.014..0.015 rows=1.00 loops=1)
+                           Output: p.payment_id, p.payer_id, p.amount, p.currency, p.payment_method, p.payment_status, p.payment_reference, p.created_at, p.paid_at
+                           Index Cond: (p.payment_id = 50)
+                           Index Searches: 1
+                           Buffers: shared hit=6
+                     ->  Index Scan using pk_users on public.users u  (cost=0.28..8.29 rows=1 width=28) (actual time=0.006..0.006 rows=1.00 loops=1)
+                           Output: u.user_id, u.email, u.password_hash, u.created_at, u.account_status
+                           Index Cond: (u.user_id = p.payer_id)
+                           Index Searches: 1
+                           Buffers: shared hit=3
+               ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=20) (actual time=0.011..0.011 rows=1.00 loops=1)
+                     Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                     Index Cond: (pr.user_id = u.user_id)
+                     Index Searches: 1
+                     Buffers: shared hit=3
+         ->  Bitmap Heap Scan on public.transactions t  (cost=4.30..11.46 rows=2 width=67) (actual time=0.015..0.020 rows=2.00 loops=1)
+               Output: t.transaction_id, t.payment_id, t.transaction_type, t.amount, t.transaction_status, t.provider_reference, t.created_at
+               Recheck Cond: (t.payment_id = 50)
+               Heap Blocks: exact=2
+               Buffers: shared hit=4
+               ->  Bitmap Index Scan on ix_transactions_payment_id  (cost=0.00..4.30 rows=2 width=0) (actual time=0.008..0.008 rows=2.00 loops=1)
+                     Index Cond: (t.payment_id = 50)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=486
+ Planning Time: 1.548 ms
+ Execution Time: 0.148 ms
+(44 rows)
+

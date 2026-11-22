@@ -1,0 +1,55 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q17
+-- Section: Section 7: Studio Bookings
+-- Description: List studio bookings received by provider
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                               QUERY PLAN                                                                                                                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=41.78..41.81 rows=13 width=167) (actual time=0.279..0.281 rows=14.00 loops=1)
+   Output: sb.booking_id, sb.studio_id, s.studio_name, sb.customer_id, pr.display_name, sb.start_time, sb.end_time, sb.agreed_rate, sb.currency, sb.status, sb.created_at, ((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0)), (round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2))
+   Sort Key: sb.start_time DESC
+   Sort Method: quicksort  Memory: 27kB
+   Buffers: shared hit=93
+   ->  Nested Loop Left Join  (cost=4.93..41.54 rows=13 width=167) (actual time=0.065..0.252 rows=14.00 loops=1)
+         Output: sb.booking_id, sb.studio_id, s.studio_name, sb.customer_id, pr.display_name, sb.start_time, sb.end_time, sb.agreed_rate, sb.currency, sb.status, sb.created_at, (EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0), round(((EXTRACT(epoch FROM (sb.end_time - sb.start_time)) / 3600.0) * sb.agreed_rate), 2)
+         Inner Unique: true
+         Buffers: shared hit=90
+         ->  Nested Loop  (cost=4.66..35.70 rows=13 width=99) (actual time=0.034..0.141 rows=14.00 loops=1)
+               Output: sb.booking_id, sb.studio_id, sb.customer_id, sb.start_time, sb.end_time, sb.agreed_rate, sb.currency, sb.status, sb.created_at, s.studio_name, u.user_id
+               Inner Unique: true
+               Buffers: shared hit=48
+               ->  Nested Loop  (cost=4.38..31.66 rows=13 width=91) (actual time=0.029..0.098 rows=14.00 loops=1)
+                     Output: sb.booking_id, sb.studio_id, sb.customer_id, sb.start_time, sb.end_time, sb.agreed_rate, sb.currency, sb.status, sb.created_at, s.studio_name
+                     Buffers: shared hit=19
+                     ->  Seq Scan on public.studios s  (cost=0.00..4.88 rows=1 width=32) (actual time=0.009..0.023 rows=1.00 loops=1)
+                           Output: s.studio_id, s.provider_id, s.studio_name, s.location, s.capacity, s.hourly_rate, s.currency, s.status
+                           Filter: (s.provider_id = 401)
+                           Rows Removed by Filter: 149
+                           Buffers: shared hit=3
+                     ->  Bitmap Heap Scan on public.studio_bookings sb  (cost=4.38..26.65 rows=13 width=67) (actual time=0.014..0.064 rows=14.00 loops=1)
+                           Output: sb.booking_id, sb.studio_id, sb.customer_id, sb.start_time, sb.end_time, sb.agreed_rate, sb.currency, sb.status, sb.created_at
+                           Recheck Cond: (s.studio_id = sb.studio_id)
+                           Heap Blocks: exact=14
+                           Buffers: shared hit=16
+                           ->  Bitmap Index Scan on ix_studio_bookings_studio_id  (cost=0.00..4.38 rows=13 width=0) (actual time=0.006..0.006 rows=14.00 loops=1)
+                                 Index Cond: (sb.studio_id = s.studio_id)
+                                 Index Searches: 1
+                                 Buffers: shared hit=2
+               ->  Index Only Scan using pk_users on public.users u  (cost=0.28..0.31 rows=1 width=8) (actual time=0.003..0.003 rows=1.00 loops=14)
+                     Output: u.user_id
+                     Index Cond: (u.user_id = sb.customer_id)
+                     Heap Fetches: 0
+                     Index Searches: 14
+                     Buffers: shared hit=29
+         ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=20) (actual time=0.006..0.006 rows=1.00 loops=14)
+               Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+               Index Cond: (pr.user_id = u.user_id)
+               Index Searches: 14
+               Buffers: shared hit=42
+ Planning:
+   Buffers: shared hit=418
+ Planning Time: 2.042 ms
+ Execution Time: 0.378 ms
+(45 rows)
+

@@ -1,0 +1,47 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q21
+-- Section: Section 10: Reviews & Feedback
+-- Description: Fetch reviews for a course target with reviewer profile
+-- Source File: dbms/04_queries.sql
+
+                                                                                QUERY PLAN                                                                                 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=36.69..36.70 rows=4 width=152) (actual time=0.120..0.121 rows=4.00 loops=1)
+   Output: r.review_id, r.reviewer_id, pr.display_name, pr.avatar_url, r.rating, r.review_text, r.created_at
+   Sort Key: r.created_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=33
+   ->  Nested Loop Left Join  (cost=4.86..36.65 rows=4 width=152) (actual time=0.060..0.096 rows=4.00 loops=1)
+         Output: r.review_id, r.reviewer_id, pr.display_name, pr.avatar_url, r.rating, r.review_text, r.created_at
+         Inner Unique: true
+         Buffers: shared hit=30
+         ->  Nested Loop  (cost=4.58..34.94 rows=4 width=97) (actual time=0.044..0.065 rows=4.00 loops=1)
+               Output: r.review_id, r.reviewer_id, r.rating, r.review_text, r.created_at, u.user_id
+               Inner Unique: true
+               Buffers: shared hit=18
+               ->  Bitmap Heap Scan on public.reviews r  (cost=4.31..17.75 rows=4 width=89) (actual time=0.030..0.042 rows=4.00 loops=1)
+                     Output: r.review_id, r.reviewer_id, r.reviewed_user_id, r.equipment_id, r.studio_id, r.service_id, r.course_id, r.rating, r.review_text, r.created_at
+                     Recheck Cond: (r.course_id = 25)
+                     Heap Blocks: exact=4
+                     Buffers: shared hit=9
+                     ->  Bitmap Index Scan on uq_reviews_course_target_reviewer  (cost=0.00..4.31 rows=4 width=0) (actual time=0.014..0.014 rows=4.00 loops=1)
+                           Index Cond: (r.course_id = 25)
+                           Index Searches: 1
+                           Buffers: shared hit=5
+               ->  Index Only Scan using pk_users on public.users u  (cost=0.28..4.29 rows=1 width=8) (actual time=0.003..0.003 rows=1.00 loops=4)
+                     Output: u.user_id
+                     Index Cond: (u.user_id = r.reviewer_id)
+                     Heap Fetches: 0
+                     Index Searches: 4
+                     Buffers: shared hit=9
+         ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=71) (actual time=0.007..0.007 rows=1.00 loops=4)
+               Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+               Index Cond: (pr.user_id = u.user_id)
+               Index Searches: 4
+               Buffers: shared hit=12
+ Planning:
+   Buffers: shared hit=392
+ Planning Time: 2.100 ms
+ Execution Time: 0.200 ms
+(37 rows)
+

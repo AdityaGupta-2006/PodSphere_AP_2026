@@ -1,0 +1,85 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q07
+-- Section: Section 5: Courses & Learning
+-- Description: Browse published courses with instructor details, lesson counts, and aggregate reviews
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                 QUERY PLAN                                                                                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=2782.46..2782.49 rows=10 width=309) (actual time=7.313..7.315 rows=10.00 loops=1)
+   Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, pr.display_name, pr.avatar_url, (count(DISTINCT l.lesson_id)), (COALESCE(sum(l.duration_seconds), '0'::bigint)), (COALESCE(round(avg(r.rating), 2), '0'::numeric)), (count(DISTINCT r.review_id))
+   Buffers: shared hit=4554
+   ->  Sort  (cost=2782.46..2838.46 rows=22400 width=309) (actual time=7.313..7.314 rows=10.00 loops=1)
+         Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, pr.display_name, pr.avatar_url, (count(DISTINCT l.lesson_id)), (COALESCE(sum(l.duration_seconds), '0'::bigint)), (COALESCE(round(avg(r.rating), 2), '0'::numeric)), (count(DISTINCT r.review_id))
+         Sort Key: c.created_at DESC
+         Sort Method: top-N heapsort  Memory: 35kB
+         Buffers: shared hit=4554
+         ->  GroupAggregate  (cost=290.69..2298.41 rows=22400 width=309) (actual time=1.008..7.274 rows=100.00 loops=1)
+               Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, pr.display_name, pr.avatar_url, count(DISTINCT l.lesson_id), COALESCE(sum(l.duration_seconds), '0'::bigint), COALESCE(round(avg(r.rating), 2), '0'::numeric), count(DISTINCT r.review_id)
+               Group Key: c.course_id, pr.display_name, pr.avatar_url
+               Buffers: shared hit=4551
+               ->  Incremental Sort  (cost=290.69..1570.41 rows=22400 width=275) (actual time=0.930..6.227 rows=4000.00 loops=1)
+                     Output: c.course_id, pr.display_name, pr.avatar_url, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, l.lesson_id, l.duration_seconds, r.rating, r.review_id
+                     Sort Key: c.course_id, pr.display_name, pr.avatar_url, l.lesson_id
+                     Presorted Key: c.course_id
+                     Full-sort Groups: 100  Sort Method: quicksort  Average Memory: 36kB  Peak Memory: 36kB
+                     Buffers: shared hit=4551
+                     ->  Merge Left Join  (cost=281.71..432.06 rows=22400 width=275) (actual time=0.859..2.468 rows=4000.00 loops=1)
+                           Output: c.course_id, pr.display_name, pr.avatar_url, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, l.lesson_id, l.duration_seconds, r.rating, r.review_id
+                           Merge Cond: (c.course_id = r.course_id)
+                           Buffers: shared hit=4548
+                           ->  Merge Left Join  (cost=281.43..305.69 rows=1120 width=265) (actual time=0.851..1.117 rows=1000.00 loops=1)
+                                 Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, pr.display_name, pr.avatar_url, l.lesson_id, l.duration_seconds
+                                 Merge Cond: (c.course_id = l.course_id)
+                                 Buffers: shared hit=72
+                                 ->  Sort  (cost=71.33..71.61 rows=112 width=253) (actual time=0.301..0.306 rows=100.00 loops=1)
+                                       Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, pr.display_name, pr.avatar_url
+                                       Sort Key: c.course_id
+                                       Sort Method: quicksort  Memory: 51kB
+                                       Buffers: shared hit=28
+                                       ->  Merge Join  (cost=38.22..67.52 rows=112 width=253) (actual time=0.159..0.280 rows=100.00 loops=1)
+                                             Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at, pr.display_name, pr.avatar_url
+                                             Merge Cond: (u.user_id = c.instructor_id)
+                                             Buffers: shared hit=28
+                                             ->  Merge Left Join  (cost=0.56..216.56 rows=2000 width=71) (actual time=0.018..0.174 rows=445.00 loops=1)
+                                                   Output: u.user_id, pr.display_name, pr.avatar_url
+                                                   Inner Unique: true
+                                                   Merge Cond: (u.user_id = pr.user_id)
+                                                   Buffers: shared hit=20
+                                                   ->  Index Only Scan using pk_users on public.users u  (cost=0.28..62.28 rows=2000 width=8) (actual time=0.008..0.032 rows=445.00 loops=1)
+                                                         Output: u.user_id
+                                                         Heap Fetches: 0
+                                                         Index Searches: 1
+                                                         Buffers: shared hit=4
+                                                   ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..124.28 rows=2000 width=71) (actual time=0.007..0.056 rows=445.00 loops=1)
+                                                         Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                                                         Index Searches: 1
+                                                         Buffers: shared hit=16
+                                             ->  Sort  (cost=15.56..15.84 rows=112 width=190) (actual time=0.065..0.069 rows=100.00 loops=1)
+                                                   Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at
+                                                   Sort Key: c.instructor_id
+                                                   Sort Method: quicksort  Memory: 45kB
+                                                   Buffers: shared hit=8
+                                                   ->  Seq Scan on public.courses c  (cost=0.00..11.75 rows=112 width=190) (actual time=0.004..0.046 rows=100.00 loops=1)
+                                                         Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.created_at
+                                                         Filter: ((c.price <= 100.00) AND ((c.status)::text = 'published'::text))
+                                                         Rows Removed by Filter: 150
+                                                         Buffers: shared hit=8
+                                 ->  Sort  (cost=210.10..216.35 rows=2500 width=20) (actual time=0.548..0.634 rows=2441.00 loops=1)
+                                       Output: l.lesson_id, l.duration_seconds, l.course_id
+                                       Sort Key: l.course_id
+                                       Sort Method: quicksort  Memory: 194kB
+                                       Buffers: shared hit=44
+                                       ->  Seq Scan on public.lessons l  (cost=0.00..69.00 rows=2500 width=20) (actual time=0.004..0.268 rows=2500.00 loops=1)
+                                             Output: l.lesson_id, l.duration_seconds, l.course_id
+                                             Buffers: shared hit=44
+                           ->  Index Scan using uq_reviews_course_target_reviewer on public.reviews r  (cost=0.28..380.22 rows=5000 width=18) (actual time=0.007..0.728 rows=4577.00 loops=1)
+                                 Output: r.review_id, r.reviewer_id, r.reviewed_user_id, r.equipment_id, r.studio_id, r.service_id, r.course_id, r.rating, r.review_text, r.created_at
+                                 Index Searches: 1
+                                 Buffers: shared hit=4476
+ Planning:
+   Buffers: shared hit=456
+ Planning Time: 1.983 ms
+ Execution Time: 7.389 ms
+(75 rows)
+

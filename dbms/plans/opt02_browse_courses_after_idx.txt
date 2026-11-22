@@ -1,0 +1,21 @@
+-- PodSphere CP4 Index Experiment (AFTER Index Creation)
+-- Experiment: EXP2_courses_status_created_at
+-- Description: Index on courses(status, created_at DESC) for course marketplace catalog
+-- Applied DDL: CREATE INDEX idx_courses_status_created_at ON courses (status, created_at DESC);
+
+                                                                          QUERY PLAN                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.27..2.23 rows=10 width=90) (actual time=0.010..0.011 rows=10.00 loops=1)
+   Output: course_id, instructor_id, title, price, currency, status, created_at
+   Buffers: shared hit=4
+   ->  Index Scan using idx_courses_status_created_at on public.courses c  (cost=0.27..44.48 rows=225 width=90) (actual time=0.009..0.010 rows=10.00 loops=1)
+         Output: course_id, instructor_id, title, price, currency, status, created_at
+         Index Cond: ((c.status)::text = 'published'::text)
+         Index Searches: 1
+         Buffers: shared hit=4
+ Planning:
+   Buffers: shared hit=149
+ Planning Time: 0.205 ms
+ Execution Time: 0.019 ms
+(12 rows)
+

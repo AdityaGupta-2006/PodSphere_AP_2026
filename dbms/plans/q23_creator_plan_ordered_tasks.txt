@@ -1,0 +1,55 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q23
+-- Section: Section 11: Creator Planning
+-- Description: Fetch creator plan by ID with ordered tasks
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                QUERY PLAN                                                                                                                 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=32.27..32.28 rows=5 width=253) (actual time=0.094..0.095 rows=5.00 loops=1)
+   Output: cp.plan_id, cp.creator_id, cp.plan_title, cp.podcast_idea, cp.target_launch_date, cp.plan_status, cp.created_at, pr.display_name, pt.task_id, pt.task_title, pt.task_category, pt.due_date, pt.task_status, pt.task_order
+   Sort Key: pt.task_order
+   Sort Method: quicksort  Memory: 26kB
+   Buffers: shared hit=22
+   ->  Nested Loop Left Join  (cost=5.15..32.21 rows=5 width=253) (actual time=0.059..0.072 rows=5.00 loops=1)
+         Output: cp.plan_id, cp.creator_id, cp.plan_title, cp.podcast_idea, cp.target_launch_date, cp.plan_status, cp.created_at, pr.display_name, pt.task_id, pt.task_title, pt.task_category, pt.due_date, pt.task_status, pt.task_order
+         Buffers: shared hit=19
+         ->  Nested Loop Left Join  (cost=0.83..13.02 rows=1 width=172) (actual time=0.034..0.035 rows=1.00 loops=1)
+               Output: cp.plan_id, cp.creator_id, cp.plan_title, cp.podcast_idea, cp.target_launch_date, cp.plan_status, cp.created_at, pr.display_name
+               Inner Unique: true
+               Buffers: shared hit=12
+               ->  Nested Loop  (cost=0.55..12.59 rows=1 width=168) (actual time=0.024..0.025 rows=1.00 loops=1)
+                     Output: cp.plan_id, cp.creator_id, cp.plan_title, cp.podcast_idea, cp.target_launch_date, cp.plan_status, cp.created_at, u.user_id
+                     Inner Unique: true
+                     Buffers: shared hit=9
+                     ->  Index Scan using pk_creator_plans on public.creator_plans cp  (cost=0.27..8.29 rows=1 width=160) (actual time=0.016..0.016 rows=1.00 loops=1)
+                           Output: cp.plan_id, cp.creator_id, cp.plan_title, cp.podcast_idea, cp.target_launch_date, cp.plan_status, cp.created_at, cp.updated_at
+                           Index Cond: (cp.plan_id = 10)
+                           Index Searches: 1
+                           Buffers: shared hit=6
+                     ->  Index Only Scan using pk_users on public.users u  (cost=0.28..4.29 rows=1 width=8) (actual time=0.004..0.004 rows=1.00 loops=1)
+                           Output: u.user_id
+                           Index Cond: (u.user_id = cp.creator_id)
+                           Heap Fetches: 0
+                           Index Searches: 1
+                           Buffers: shared hit=3
+               ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=20) (actual time=0.008..0.008 rows=1.00 loops=1)
+                     Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                     Index Cond: (pr.user_id = u.user_id)
+                     Index Searches: 1
+                     Buffers: shared hit=3
+         ->  Bitmap Heap Scan on public.plan_tasks pt  (cost=4.32..19.14 rows=5 width=89) (actual time=0.023..0.034 rows=5.00 loops=1)
+               Output: pt.task_id, pt.plan_id, pt.task_title, pt.task_category, pt.due_date, pt.task_status, pt.task_order, pt.created_at
+               Recheck Cond: (pt.plan_id = 10)
+               Heap Blocks: exact=5
+               Buffers: shared hit=7
+               ->  Bitmap Index Scan on uq_plan_tasks_plan_order  (cost=0.00..4.32 rows=5 width=0) (actual time=0.011..0.011 rows=5.00 loops=1)
+                     Index Cond: (pt.plan_id = 10)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=379
+ Planning Time: 1.789 ms
+ Execution Time: 0.177 ms
+(45 rows)
+

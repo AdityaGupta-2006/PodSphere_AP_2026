@@ -1,0 +1,103 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q24
+-- Section: Section 12: Analytics & Dashboards
+-- Description: Creator 360 overview dashboard: podcasts, episodes, courses, enrolled students, planning status
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                                                QUERY PLAN                                                                                                                                                                                
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=136.79..147.80 rows=1 width=76) (actual time=0.258..0.260 rows=1.00 loops=1)
+   Output: u.user_id, pr.display_name, count(DISTINCT p.podcast_id), count(DISTINCT e.episode_id), count(DISTINCT e.episode_id) FILTER (WHERE ((e.status)::text = 'published'::text)), count(DISTINCT c.course_id), count(DISTINCT enr.enrollment_id), count(DISTINCT cp.plan_id), count(DISTINCT pt.task_id) FILTER (WHERE ((pt.task_status)::text = 'completed'::text))
+   Group Key: pr.display_name
+   Buffers: shared hit=41
+   ->  Sort  (cost=136.79..137.79 rows=400 width=88) (actual time=0.205..0.210 rows=50.00 loops=1)
+         Output: pr.display_name, u.user_id, p.podcast_id, e.episode_id, e.status, c.course_id, enr.enrollment_id, cp.plan_id, pt.task_id, pt.task_status
+         Sort Key: pr.display_name, e.episode_id
+         Sort Method: quicksort  Memory: 30kB
+         Buffers: shared hit=41
+         ->  Nested Loop Left Join  (cost=14.27..119.50 rows=400 width=88) (actual time=0.113..0.154 rows=50.00 loops=1)
+               Output: pr.display_name, u.user_id, p.podcast_id, e.episode_id, e.status, c.course_id, enr.enrollment_id, cp.plan_id, pt.task_id, pt.task_status
+               Buffers: shared hit=35
+               ->  Nested Loop Left Join  (cost=9.63..68.19 rows=40 width=63) (actual time=0.088..0.101 rows=5.00 loops=1)
+                     Output: u.user_id, pr.display_name, c.course_id, enr.enrollment_id, cp.plan_id, pt.task_id, pt.task_status
+                     Buffers: shared hit=20
+                     ->  Nested Loop Left Join  (cost=5.04..40.20 rows=8 width=36) (actual time=0.066..0.068 rows=1.00 loops=1)
+                           Output: u.user_id, pr.display_name, c.course_id, enr.enrollment_id
+                           Buffers: shared hit=10
+                           ->  Nested Loop Left Join  (cost=0.70..20.77 rows=1 width=28) (actual time=0.062..0.063 rows=1.00 loops=1)
+                                 Output: u.user_id, pr.display_name, c.course_id
+                                 Buffers: shared hit=10
+                                 ->  Nested Loop Left Join  (cost=0.56..12.60 rows=1 width=20) (actual time=0.056..0.056 rows=1.00 loops=1)
+                                       Output: u.user_id, pr.display_name
+                                       Inner Unique: true
+                                       Buffers: shared hit=9
+                                       ->  Index Only Scan using pk_users on public.users u  (cost=0.28..4.29 rows=1 width=8) (actual time=0.048..0.048 rows=1.00 loops=1)
+                                             Output: u.user_id
+                                             Index Cond: (u.user_id = 1)
+                                             Heap Fetches: 0
+                                             Index Searches: 1
+                                             Buffers: shared hit=6
+                                       ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..8.29 rows=1 width=20) (actual time=0.006..0.006 rows=1.00 loops=1)
+                                             Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                                             Index Cond: (pr.user_id = 1)
+                                             Index Searches: 1
+                                             Buffers: shared hit=3
+                                 ->  Index Scan using ix_courses_instructor_id on public.courses c  (cost=0.14..8.16 rows=1 width=16) (actual time=0.006..0.006 rows=0.00 loops=1)
+                                       Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at
+                                       Index Cond: (c.instructor_id = 1)
+                                       Index Searches: 1
+                                       Buffers: shared hit=1
+                           ->  Bitmap Heap Scan on public.enrollments enr  (cost=4.34..19.34 rows=8 width=16) (actual time=0.003..0.003 rows=0.00 loops=1)
+                                 Output: enr.enrollment_id, enr.user_id, enr.course_id, enr.enrolled_at, enr.status
+                                 Recheck Cond: (c.course_id = enr.course_id)
+                                 ->  Bitmap Index Scan on ix_enrollments_course_id  (cost=0.00..4.34 rows=8 width=0) (actual time=0.000..0.000 rows=0.00 loops=1)
+                                       Index Cond: (enr.course_id = c.course_id)
+                                       Index Searches: 0
+                     ->  Materialize  (cost=4.59..27.51 rows=5 width=35) (actual time=0.021..0.031 rows=5.00 loops=1)
+                           Output: cp.plan_id, cp.creator_id, pt.task_id, pt.task_status
+                           Storage: Memory  Maximum Storage: 17kB
+                           Buffers: shared hit=10
+                           ->  Nested Loop Left Join  (cost=4.59..27.48 rows=5 width=35) (actual time=0.016..0.024 rows=5.00 loops=1)
+                                 Output: cp.plan_id, cp.creator_id, pt.task_id, pt.task_status
+                                 Buffers: shared hit=10
+                                 ->  Index Scan using ix_creator_plans_creator_id on public.creator_plans cp  (cost=0.27..8.29 rows=1 width=16) (actual time=0.008..0.008 rows=1.00 loops=1)
+                                       Output: cp.plan_id, cp.creator_id, cp.plan_title, cp.podcast_idea, cp.target_launch_date, cp.plan_status, cp.created_at, cp.updated_at
+                                       Index Cond: (cp.creator_id = 1)
+                                       Index Searches: 1
+                                       Buffers: shared hit=3
+                                 ->  Bitmap Heap Scan on public.plan_tasks pt  (cost=4.32..19.14 rows=5 width=27) (actual time=0.007..0.014 rows=5.00 loops=1)
+                                       Output: pt.task_id, pt.plan_id, pt.task_title, pt.task_category, pt.due_date, pt.task_status, pt.task_order, pt.created_at
+                                       Recheck Cond: (cp.plan_id = pt.plan_id)
+                                       Heap Blocks: exact=5
+                                       Buffers: shared hit=7
+                                       ->  Bitmap Index Scan on uq_plan_tasks_plan_order  (cost=0.00..4.32 rows=5 width=0) (actual time=0.003..0.003 rows=5.00 loops=1)
+                                             Index Cond: (pt.plan_id = cp.plan_id)
+                                             Index Searches: 1
+                                             Buffers: shared hit=2
+               ->  Materialize  (cost=4.64..46.33 rows=10 width=33) (actual time=0.005..0.009 rows=10.00 loops=5)
+                     Output: p.podcast_id, p.creator_id, e.episode_id, e.status
+                     Storage: Memory  Maximum Storage: 17kB
+                     Buffers: shared hit=15
+                     ->  Nested Loop Left Join  (cost=4.64..46.28 rows=10 width=33) (actual time=0.019..0.037 rows=10.00 loops=1)
+                           Output: p.podcast_id, p.creator_id, e.episode_id, e.status
+                           Buffers: shared hit=15
+                           ->  Index Scan using ix_podcasts_creator_id on public.podcasts p  (cost=0.28..8.29 rows=1 width=16) (actual time=0.006..0.007 rows=1.00 loops=1)
+                                 Output: p.podcast_id, p.creator_id, p.title, p.description, p.category, p.language, p.status, p.created_at
+                                 Index Cond: (p.creator_id = 1)
+                                 Index Searches: 1
+                                 Buffers: shared hit=3
+                           ->  Bitmap Heap Scan on public.episodes e  (cost=4.36..37.89 rows=10 width=25) (actual time=0.012..0.027 rows=10.00 loops=1)
+                                 Output: e.episode_id, e.podcast_id, e.episode_number, e.title, e.description, e.media_url, e.duration_seconds, e.status, e.published_at
+                                 Recheck Cond: (p.podcast_id = e.podcast_id)
+                                 Heap Blocks: exact=10
+                                 Buffers: shared hit=12
+                                 ->  Bitmap Index Scan on uq_episodes_podcast_number  (cost=0.00..4.36 rows=10 width=0) (actual time=0.004..0.004 rows=10.00 loops=1)
+                                       Index Cond: (e.podcast_id = p.podcast_id)
+                                       Index Searches: 1
+                                       Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=557
+ Planning Time: 3.405 ms
+ Execution Time: 0.393 ms
+(93 rows)
+

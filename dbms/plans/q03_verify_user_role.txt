@@ -1,0 +1,33 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q03
+-- Section: Section 3: Roles & Permissions
+-- Description: Verify if user holds a specific named role
+-- Source File: dbms/04_queries.sql
+
+                                                                        QUERY PLAN                                                                        
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+ Result  (cost=5.40..5.41 rows=1 width=1) (actual time=0.035..0.035 rows=1.00 loops=1)
+   Output: (InitPlan 1).col1
+   Buffers: shared hit=7
+   InitPlan 1
+     ->  Nested Loop  (cost=0.28..5.40 rows=1 width=0) (actual time=0.034..0.034 rows=1.00 loops=1)
+           Inner Unique: true
+           Join Filter: (ur.role_id = r.role_id)
+           Buffers: shared hit=7
+           ->  Seq Scan on public.roles r  (cost=0.00..1.06 rows=1 width=8) (actual time=0.004..0.004 rows=1.00 loops=1)
+                 Output: r.role_id, r.role_name, r.description
+                 Filter: ((r.role_name)::text = 'creator'::text)
+                 Rows Removed by Filter: 1
+                 Buffers: shared hit=1
+           ->  Index Only Scan using pk_user_roles on public.user_roles ur  (cost=0.28..4.31 rows=2 width=8) (actual time=0.028..0.028 rows=1.00 loops=1)
+                 Output: ur.user_id, ur.role_id
+                 Index Cond: (ur.user_id = 42)
+                 Heap Fetches: 0
+                 Index Searches: 1
+                 Buffers: shared hit=6
+ Planning:
+   Buffers: shared hit=241
+ Planning Time: 0.350 ms
+ Execution Time: 0.057 ms
+(23 rows)
+

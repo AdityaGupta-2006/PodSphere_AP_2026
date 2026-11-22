@@ -1,0 +1,54 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q10
+-- Section: Section 5: Courses & Learning
+-- Description: List all courses a learner is enrolled in along with progress completion percentage
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                     QUERY PLAN                                                                                                                                                     
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=23.26..23.66 rows=10 width=118) (actual time=0.121..0.122 rows=1.00 loops=1)
+   Output: c.course_id, c.title, e.enrolled_at, e.status, count(l.lesson_id), count(lp.lesson_id) FILTER (WHERE lp.is_completed), CASE WHEN (count(l.lesson_id) = 0) THEN 0.0 ELSE round((((count(lp.lesson_id) FILTER (WHERE lp.is_completed))::numeric / (count(l.lesson_id))::numeric) * '100'::numeric), 2) END
+   Group Key: e.enrolled_at, c.course_id, e.status
+   Buffers: shared hit=55
+   ->  Sort  (cost=23.26..23.28 rows=10 width=87) (actual time=0.105..0.106 rows=10.00 loops=1)
+         Output: c.course_id, e.enrolled_at, e.status, c.title, l.lesson_id, lp.lesson_id, lp.is_completed
+         Sort Key: e.enrolled_at DESC, c.course_id, e.status
+         Sort Method: quicksort  Memory: 26kB
+         Buffers: shared hit=55
+         ->  Nested Loop Left Join  (cost=0.99..23.09 rows=10 width=87) (actual time=0.036..0.076 rows=10.00 loops=1)
+               Output: c.course_id, e.enrolled_at, e.status, c.title, l.lesson_id, lp.lesson_id, lp.is_completed
+               Inner Unique: true
+               Buffers: shared hit=46
+               ->  Nested Loop Left Join  (cost=0.70..18.04 rows=10 width=86) (actual time=0.027..0.046 rows=10.00 loops=1)
+                     Output: e.enrolled_at, e.status, e.user_id, c.course_id, c.title, l.lesson_id
+                     Buffers: shared hit=20
+                     ->  Nested Loop  (cost=0.42..16.52 rows=1 width=78) (actual time=0.018..0.018 rows=1.00 loops=1)
+                           Output: e.enrolled_at, e.status, e.user_id, c.course_id, c.title
+                           Inner Unique: true
+                           Buffers: shared hit=8
+                           ->  Index Scan using uq_enrollments_user_course on public.enrollments e  (cost=0.28..8.29 rows=1 width=32) (actual time=0.012..0.012 rows=1.00 loops=1)
+                                 Output: e.enrollment_id, e.user_id, e.course_id, e.enrolled_at, e.status
+                                 Index Cond: (e.user_id = 42)
+                                 Index Searches: 1
+                                 Buffers: shared hit=6
+                           ->  Index Scan using pk_courses on public.courses c  (cost=0.14..8.16 rows=1 width=54) (actual time=0.003..0.003 rows=1.00 loops=1)
+                                 Output: c.course_id, c.instructor_id, c.title, c.description, c.price, c.currency, c.status, c.created_at
+                                 Index Cond: (c.course_id = e.course_id)
+                                 Index Searches: 1
+                                 Buffers: shared hit=2
+                     ->  Index Scan using uq_lessons_course_order on public.lessons l  (cost=0.28..1.42 rows=10 width=16) (actual time=0.008..0.025 rows=10.00 loops=1)
+                           Output: l.lesson_id, l.course_id, l.lesson_order, l.title, l.content_url, l.duration_seconds
+                           Index Cond: (l.course_id = c.course_id)
+                           Index Searches: 1
+                           Buffers: shared hit=12
+               ->  Index Scan using pk_lesson_progress on public.lesson_progress lp  (cost=0.29..0.50 rows=1 width=17) (actual time=0.003..0.003 rows=0.60 loops=10)
+                     Output: lp.user_id, lp.lesson_id, lp.is_completed, lp.completed_at, lp.updated_at
+                     Index Cond: ((lp.user_id = 42) AND (lp.lesson_id = l.lesson_id))
+                     Index Searches: 10
+                     Buffers: shared hit=26
+ Planning:
+   Buffers: shared hit=381
+ Planning Time: 1.367 ms
+ Execution Time: 0.184 ms
+(44 rows)
+

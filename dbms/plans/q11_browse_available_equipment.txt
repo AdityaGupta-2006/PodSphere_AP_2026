@@ -1,0 +1,72 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q11
+-- Section: Section 6: Equipment & Rentals
+-- Description: Browse available equipment catalog with category, provider details, and review metrics
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                            QUERY PLAN                                                                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=10.56..22.08 rows=10 width=291) (actual time=0.504..0.516 rows=10.00 loops=1)
+   Output: eq.equipment_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status, ec.category_name, pr.display_name, pr.avatar_url, (COALESCE(round(avg(r.rating), 2), '0'::numeric)), (count(DISTINCT r.review_id))
+   Buffers: shared hit=224
+   ->  GroupAggregate  (cost=10.56..394.15 rows=333 width=291) (actual time=0.503..0.514 rows=10.00 loops=1)
+         Output: eq.equipment_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status, ec.category_name, pr.display_name, pr.avatar_url, COALESCE(round(avg(r.rating), 2), '0'::numeric), count(DISTINCT r.review_id)
+         Group Key: eq.equipment_id, ec.category_name, pr.display_name, pr.avatar_url
+         Buffers: shared hit=224
+         ->  Incremental Sort  (cost=10.56..384.16 rows=333 width=261) (actual time=0.488..0.489 rows=11.00 loops=1)
+               Output: eq.equipment_id, ec.category_name, pr.display_name, pr.avatar_url, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status, r.rating, r.review_id
+               Sort Key: eq.equipment_id DESC, ec.category_name, pr.display_name, pr.avatar_url, r.review_id
+               Presorted Key: eq.equipment_id
+               Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 33kB  Peak Memory: 33kB
+               Buffers: shared hit=224
+               ->  Nested Loop Left Join  (cost=1.10..374.11 rows=333 width=261) (actual time=0.087..0.421 rows=34.00 loops=1)
+                     Output: eq.equipment_id, ec.category_name, pr.display_name, pr.avatar_url, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status, r.rating, r.review_id
+                     Buffers: shared hit=218
+                     ->  Nested Loop Left Join  (cost=0.83..112.36 rows=40 width=251) (actual time=0.064..0.289 rows=24.00 loops=1)
+                           Output: eq.equipment_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status, ec.category_name, pr.display_name, pr.avatar_url
+                           Inner Unique: true
+                           Buffers: shared hit=136
+                           ->  Nested Loop  (cost=0.55..95.20 rows=40 width=196) (actual time=0.047..0.199 rows=24.00 loops=1)
+                                 Output: eq.equipment_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status, ec.category_name, u.user_id
+                                 Inner Unique: true
+                                 Buffers: shared hit=64
+                                 ->  Nested Loop  (cost=0.28..51.40 rows=40 width=196) (actual time=0.029..0.139 rows=24.00 loops=1)
+                                       Output: eq.equipment_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status, eq.provider_id, ec.category_name
+                                       Buffers: shared hit=15
+                                       ->  Index Scan Backward using pk_equipment on public.equipment eq  (cost=0.28..49.77 rows=40 width=185) (actual time=0.010..0.109 rows=24.00 loops=1)
+                                             Output: eq.equipment_id, eq.provider_id, eq.category_id, eq.equipment_name, eq.description, eq.daily_rate, eq.currency, eq.quantity, eq.equipment_status
+                                             Filter: ((eq.daily_rate <= 100.00) AND (eq.category_id = 1) AND ((eq.equipment_status)::text = 'available'::text))
+                                             Rows Removed by Filter: 336
+                                             Index Searches: 1
+                                             Buffers: shared hit=14
+                                       ->  Materialize  (cost=0.00..1.13 rows=1 width=27) (actual time=0.001..0.001 rows=1.00 loops=24)
+                                             Output: ec.category_name, ec.category_id
+                                             Storage: Memory  Maximum Storage: 17kB
+                                             Buffers: shared hit=1
+                                             ->  Seq Scan on public.equipment_categories ec  (cost=0.00..1.12 rows=1 width=27) (actual time=0.012..0.013 rows=1.00 loops=1)
+                                                   Output: ec.category_name, ec.category_id
+                                                   Filter: (ec.category_id = 1)
+                                                   Rows Removed by Filter: 9
+                                                   Buffers: shared hit=1
+                                 ->  Index Only Scan using pk_users on public.users u  (cost=0.28..1.09 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=24)
+                                       Output: u.user_id
+                                       Index Cond: (u.user_id = eq.provider_id)
+                                       Heap Fetches: 0
+                                       Index Searches: 24
+                                       Buffers: shared hit=49
+                           ->  Index Scan using uq_profiles_user_id on public.profiles pr  (cost=0.28..0.43 rows=1 width=71) (actual time=0.003..0.003 rows=1.00 loops=24)
+                                 Output: pr.profile_id, pr.user_id, pr.display_name, pr.bio, pr.avatar_url, pr.website_url, pr.updated_at
+                                 Index Cond: (pr.user_id = u.user_id)
+                                 Index Searches: 24
+                                 Buffers: shared hit=72
+                     ->  Index Scan using uq_reviews_equipment_target_reviewer on public.reviews r  (cost=0.28..6.52 rows=2 width=18) (actual time=0.004..0.005 rows=1.42 loops=24)
+                           Output: r.review_id, r.reviewer_id, r.reviewed_user_id, r.equipment_id, r.studio_id, r.service_id, r.course_id, r.rating, r.review_text, r.created_at
+                           Index Cond: (r.equipment_id = eq.equipment_id)
+                           Index Searches: 24
+                           Buffers: shared hit=82
+ Planning:
+   Buffers: shared hit=464
+ Planning Time: 2.547 ms
+ Execution Time: 0.636 ms
+(62 rows)
+

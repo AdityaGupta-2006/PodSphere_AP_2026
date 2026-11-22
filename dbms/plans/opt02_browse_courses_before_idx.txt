@@ -1,0 +1,26 @@
+-- PodSphere CP4 Index Experiment (BEFORE Index Creation)
+-- Experiment: EXP2_courses_status_created_at
+-- Description: Index on courses(status, created_at DESC) for course marketplace catalog
+-- Status: Baseline without proposed index
+
+                                                          QUERY PLAN                                                           
+-------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=15.99..16.01 rows=10 width=90) (actual time=0.074..0.075 rows=10.00 loops=1)
+   Output: course_id, instructor_id, title, price, currency, status, created_at
+   Buffers: shared hit=11
+   ->  Sort  (cost=15.99..16.55 rows=225 width=90) (actual time=0.073..0.073 rows=10.00 loops=1)
+         Output: course_id, instructor_id, title, price, currency, status, created_at
+         Sort Key: c.created_at DESC
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=11
+         ->  Seq Scan on public.courses c  (cost=0.00..11.12 rows=225 width=90) (actual time=0.005..0.035 rows=225.00 loops=1)
+               Output: course_id, instructor_id, title, price, currency, status, created_at
+               Filter: ((c.status)::text = 'published'::text)
+               Rows Removed by Filter: 25
+               Buffers: shared hit=8
+ Planning:
+   Buffers: shared hit=116
+ Planning Time: 0.184 ms
+ Execution Time: 0.083 ms
+(17 rows)
+

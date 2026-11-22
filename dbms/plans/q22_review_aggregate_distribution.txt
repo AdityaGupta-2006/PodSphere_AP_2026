@@ -1,0 +1,26 @@
+-- PodSphere CP4 Execution Plan
+-- Query ID: Q22
+-- Section: Section 10: Reviews & Feedback
+-- Description: Calculate aggregate rating score and star distribution breakdown for an entity
+-- Source File: dbms/04_queries.sql
+
+                                                                                                                                                   QUERY PLAN                                                                                                                                                    
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=17.88..17.89 rows=1 width=80) (actual time=0.058..0.058 rows=1.00 loops=1)
+   Output: count(review_id), COALESCE(round(avg(rating), 2), '0'::numeric), count(review_id) FILTER (WHERE (rating = 5)), count(review_id) FILTER (WHERE (rating = 4)), count(review_id) FILTER (WHERE (rating = 3)), count(review_id) FILTER (WHERE (rating = 2)), count(review_id) FILTER (WHERE (rating = 1))
+   Buffers: shared hit=9
+   ->  Bitmap Heap Scan on public.reviews r  (cost=4.31..17.75 rows=4 width=10) (actual time=0.029..0.039 rows=4.00 loops=1)
+         Output: review_id, reviewer_id, reviewed_user_id, equipment_id, studio_id, service_id, course_id, rating, review_text, created_at
+         Recheck Cond: (r.course_id = 25)
+         Heap Blocks: exact=4
+         Buffers: shared hit=9
+         ->  Bitmap Index Scan on uq_reviews_course_target_reviewer  (cost=0.00..4.31 rows=4 width=0) (actual time=0.018..0.018 rows=4.00 loops=1)
+               Index Cond: (r.course_id = 25)
+               Index Searches: 1
+               Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=167
+ Planning Time: 1.013 ms
+ Execution Time: 0.130 ms
+(16 rows)
+
